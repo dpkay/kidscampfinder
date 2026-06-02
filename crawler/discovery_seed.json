@@ -181,8 +181,8 @@
    "description": "Brazilian Jiu-Jitsu summer camp at Rietberg Montessori School Zürich. Half/Full day (9:00–16:00) for ages 6–12: Jiu-Jitsu training, team games, creative workshops, outdoor activities, anti-bullying & self-defense.",
    "image_url": "https://primary.jwwb.nl/public/r/h/b/temp-rffzknhcozzszrjlqadd/img_2132-high.jpg?enable-io=true&enable=upscale&fit=bounds&width=1200",
    "confidence": 0.85,
-   "query": "kinder sommercamp zürich jiu jitsu",
-   "extractor": "agent",
+   "query": null,
+   "extractor": "manual (URL provided by user; NOT found by search — verabjj.ch does not surface in our search backend)",
    "occasions": [
     {
      "start_date": "2026-08-03",
@@ -216,8 +216,8 @@
    "description": "Brazilian Jiu-Jitsu summer camp at Rietberg Montessori School Zürich. Morning program (9:00–12:00) for ages 4–5: playful games, intro to Jiu-Jitsu, lunch & ice cream.",
    "image_url": "https://primary.jwwb.nl/public/r/h/b/temp-rffzknhcozzszrjlqadd/img_2132-high.jpg?enable-io=true&enable=upscale&fit=bounds&width=1200",
    "confidence": 0.85,
-   "query": "kinder sommercamp zürich jiu jitsu",
-   "extractor": "agent",
+   "query": null,
+   "extractor": "manual (URL provided by user; NOT found by search — verabjj.ch does not surface in our search backend)",
    "occasions": [
     {
      "start_date": "2026-08-03",
