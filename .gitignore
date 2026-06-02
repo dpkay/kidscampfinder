@@ -1,0 +1,23 @@
+# data is regenerable by the crawler
+data/
+
+# python
+crawler/.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# node / web
+web/node_modules/
+web/dist/
+node_modules/
+
+# crawler HTML cache (lives under data/ but ignore stray copies too)
+html_cache/
+
+# os
+.DS_Store
+
+# local secrets
+web/.env

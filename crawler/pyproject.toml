@@ -1,0 +1,22 @@
+[project]
+name = "coursecrawler"
+version = "0.1.0"
+description = "Crawler for kids' holiday courses in Canton Zürich"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx[http2]",
+    "selectolax",
+    "beautifulsoup4",
+    "lxml",
+    "dateparser",
+    "rapidfuzz",
+    "langdetect",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["coursecrawler*"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
