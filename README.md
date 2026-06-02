@@ -98,9 +98,11 @@ the admin dashboard.
 - jugendsportcamps is national (~880); we keep the ~217 inside a ZH bounding box.
 - More Feriennet ZH instances beyond the ten probed (long-tail, mostly tiny).
 
-Note: the crawler now uses Playwright (Python) for JS-only sources, but most sources needed
-only HTTP — jugendsportcamps had a JSON API, codora/friLingue/ferienprogramm are server-rendered.
-friLingue camps currently have no image (placeholder by topic); not yet extracted.
+Note: the crawler has Playwright (Python) available for JS-only sources, but every shipped
+source needed only HTTP — jugendsportcamps had a JSON API; codora/friLingue/ferienprogramm
+are server-rendered. (Evaluated then skipped as low-ROI/off-scope: **Logiscool** — booking-widget
+walled; **codecampworld** — weekly term courses, not holiday camps; **Zoo/Technorama** —
+teaser-nav / booking systems; **kinder-camps** — JS + national dilution.)
 
 **Known caveats:**
 - ferienprogramm.ch spans the Winterthur–Thurgau border, so some communes are outside ZH.

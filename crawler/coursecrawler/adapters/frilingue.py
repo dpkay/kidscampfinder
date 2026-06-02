@@ -26,6 +26,16 @@ _DT_DD = lambda label: re.compile(
 )
 _AGE = re.compile(r"(\d{1,2})\s*[-–]\s*(\d{1,2})\s*Jahre")
 _DATE = re.compile(r"(\d{1,2})\.(\d{1,2})(?:\.(\d{4}))?")
+_IMG = re.compile(r'<img[^>]+(?:data-src|src)="([^"]+\.(?:jpg|jpeg|png|webp)[^"]*)"', re.I)
+
+
+def _first_image(block: str) -> Optional[str]:
+    for u in _IMG.findall(block):
+        low = u.lower()
+        if "logo" in low or "icon" in low:
+            continue
+        return u if u.startswith("http") else "https://www.frilingue.ch" + u
+    return None
 
 
 class FrilingueAdapter(Adapter):
@@ -76,6 +86,7 @@ class FrilingueAdapter(Adapter):
             description_snippet=normalize.make_snippet(kurse),
             age_min=age_min,
             age_max=age_max,
+            image_url=_first_image(block),
             format="residential",
         )
 
