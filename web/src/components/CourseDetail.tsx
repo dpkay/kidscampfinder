@@ -12,6 +12,8 @@ const TOPIC_EMOJI: Record<string, string> = {
 
 type Mode = "" | "close" | "page";
 
+let swipeHintSeen = false; // show the swipe hint only once per session
+
 export function CourseDetail({
   courses,
   index,
@@ -25,10 +27,20 @@ export function CourseDetail({
   onIndexChange: (i: number) => void;
   onClose: () => void;
 }) {
-  const { t, topic, format } = makeT(lang);
+  const { t, topic, format, locale } = makeT(lang);
   const [off, setOff] = useState({ x: 0, y: 0 });
   const [anim, setAnim] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const g = useRef<{ sx: number; sy: number; mode: Mode } | null>(null);
+
+  // first time a detail is opened this session, briefly show how to navigate
+  useEffect(() => {
+    if (swipeHintSeen || courses.length < 2) return;
+    swipeHintSeen = true;
+    setShowHint(true);
+    const id = window.setTimeout(() => setShowHint(false), 2900);
+    return () => clearTimeout(id);
+  }, []);
 
   const vw = () => window.innerWidth;
   const vh = () => window.innerHeight;
@@ -100,6 +112,7 @@ export function CourseDetail({
         </svg>
       </button>
       <div className="cd-counter">{index + 1} / {courses.length}</div>
+      {showHint && <div className="cd-swipehint">{t("swipeHint")}</div>}
 
       <div
         className="cd-page"
@@ -137,7 +150,7 @@ export function CourseDetail({
                 return (
                   <span key={i} className="cd-date-pill">
                     <b>KW {o.isoWeekStart}{multiDay && o.isoWeekEnd && o.isoWeekEnd !== o.isoWeekStart ? `–${o.isoWeekEnd}` : ""}</b>
-                    {" · "}{fmtDate(o.startDate)}{multiDay ? ` – ${fmtDate(o.endDate)}` : ""}
+                    {" · "}{fmtDate(o.startDate, locale)}{multiDay ? ` – ${fmtDate(o.endDate, locale)}` : ""}
                     {o.startTime ? ` · ${o.startTime}` : ""}
                     {o.spotsAvailable != null ? ` · ${o.spotsAvailable} ${t("spots")}` : ""}
                   </span>
@@ -145,6 +158,9 @@ export function CourseDetail({
               })}
               {course.occasions.length > 4 && <span className="cd-date-pill more">+{course.occasions.length - 4}</span>}
             </div>
+            {course.occasions[0]?.registrationDeadline && (
+              <div className="cd-deadline">⏳ {t("deadline")}: {fmtDate(course.occasions[0].registrationDeadline, locale)}</div>
+            )}
           </div>
 
           <div className="cd-footer">
@@ -159,7 +175,7 @@ export function CourseDetail({
   );
 }
 
-function fmtDate(s: string | null): string {
+function fmtDate(s: string | null, locale: string): string {
   if (!s) return "—";
-  return new Date(s).toLocaleDateString("de-CH", { weekday: "short", day: "numeric", month: "short" });
+  return new Date(s).toLocaleDateString(locale, { weekday: "short", day: "numeric", month: "short" });
 }

@@ -39,7 +39,7 @@ Extraction (turning free-form page text into structured course records) needs an
 - **Hand `discovery_out/` back to Claude** (zip it, or `git add` + commit it) → it extracts
   records and runs `python -m coursecrawler.discovery <records.json>` (dedups vs the DB,
   persists as `discovered:<domain>` with `needs_verify`).
-- **Or run extraction yourself** with an `ANTHROPIC_API_KEY` (see `docs/discovery.md` for the
+- **Or run extraction yourself** with an `ANTHROPIC_API_KEY` (see `docs/TDD.md §14` for the
   Claude-Haiku structured-output approach).
 
 ## Status

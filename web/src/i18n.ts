@@ -61,6 +61,9 @@ const STRINGS: Dict = {
   inThisArea: { de: "in diesem Kartenausschnitt", en: "in this map area" },
   swipeHint: { de: "↕ wischen für nächste · ← wegwischen", en: "↕ swipe for next · ← swipe to dismiss" },
   various: { de: "verschiedene", en: "various" },
+  loading: { de: "Lädt…", en: "Loading…" },
+  noResultsHere: { de: "Keine Kurse in diesem Bereich", en: "No camps in this area" },
+  zoomOrReset: { de: "Zoom raus oder passe die Filter an.", en: "Zoom out or adjust the filters." },
   daysAgo: { de: "Tg.", en: "d ago" },
 };
 
@@ -90,5 +93,6 @@ export function makeT(lang: Lang) {
   const t = (key: string) => STRINGS[key]?.[lang] ?? key;
   const topic = (k: string) => TOPIC_LABELS[k]?.[lang] ?? k;
   const format = (k: string) => FORMAT_LABELS[k]?.[lang] ?? k;
-  return { t, topic, format };
+  const locale = lang === "en" ? "en-GB" : "de-CH";
+  return { t, topic, format, locale };
 }

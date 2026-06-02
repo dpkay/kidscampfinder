@@ -19,7 +19,7 @@ export function FilterSheet({
   onReset: () => void;
   onClose: () => void;
 }) {
-  const { t, topic, format } = makeT(lang);
+  const { t, topic, format, locale } = makeT(lang);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
@@ -44,7 +44,7 @@ export function FilterSheet({
             <option value="">{t("allWeeks")}</option>
             {meta.weeks.map((w) => (
               <option key={`${w.isoYear}-${w.isoWeek}`} value={String(w.isoWeek)}>
-                {fmtD(w.startDate)} – {fmtD(w.endDate, true)} · KW {w.isoWeek} ({w.courseCount})
+                {fmtD(w.startDate, locale)} – {fmtD(w.endDate, locale, true)} · KW {w.isoWeek} ({w.courseCount})
               </option>
             ))}
           </select>
@@ -99,8 +99,8 @@ export function FilterSheet({
   );
 }
 
-function fmtD(iso: string, withYear = false): string {
-  return new Date(iso).toLocaleDateString("de-CH", {
+function fmtD(iso: string, locale: string, withYear = false): string {
+  return new Date(iso).toLocaleDateString(locale, {
     day: "numeric", month: "long", ...(withYear ? { year: "numeric" } : {}),
   });
 }

@@ -25,34 +25,39 @@ It has two parts:
 
 > 📚 Background docs: [`docs/PRD.md`](docs/PRD.md) (the product plan),
 > [`docs/TDD.md`](docs/TDD.md) (the technical design),
-> [`docs/research-sources.md`](docs/research-sources.md) (where the data comes from).
+> [`docs/RESEARCH-SOURCES.md`](docs/RESEARCH-SOURCES.md) (where the data comes from).
 
 ---
 
 ## 🚀 Try it (quick start)
 
-You need **Python 3.11+** and **Node 20+**. Two steps, two terminals.
+You need **Python 3.11+** and **Node 20+**.
 
-**1) Build the dataset** (the crawler — do this once to fill the database):
+**1) Build the dataset** (the crawler):
 
 ```bash
 cd crawler
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e .
-python -m coursecrawler.run        # crawls everything, ~a few minutes
+python -m coursecrawler.run        # crawls everything, ~a few min → data/coursecrawler.sqlite
 ```
 
-**2) Run the app:**
+**2) Export it to static JSON, then run the app.** The web app is a fully **static** SPA —
+it reads pre-generated JSON, there is no backend server. The export step dumps the SQLite DB
+to JSON the app loads directly:
 
 ```bash
-cd web
+cd ../web
 npm install
-npm run dev                         # → https://localhost:5173
+npm run export                     # SQLite → web/public/api/{courses,meta,admin}.json
+npm run dev                        # → https://localhost:5173
 ```
 
-Open **https://localhost:5173** in your browser. (It's a self-signed HTTPS certificate in dev,
-so you'll get a one-time "not secure" warning — click *Advanced → proceed*. HTTPS is on so the
-"my location" button works.)
+> Camp images live committed under `web/public/images/`; if a fresh crawl adds new ones, copy
+> them in too: `cp -rn ../data/images/. public/images/`.
+
+Open **https://localhost:5173** in your browser. (Self-signed HTTPS cert in dev → a one-time
+"not secure" warning; click *Advanced → proceed*. HTTPS is on so the "my location" button works.)
 
 **Open it on your phone** (same Wi-Fi): run `npm run dev:host` instead — it binds the dev
 server to your network and prints a `https://<your-computer-ip>:5173` URL. Open that on the
@@ -80,8 +85,9 @@ coverage (% with image / price / coordinates / …), counts by source/topic/comm
 
 Screenshots of every view are in [`web/screenshots/`](web/screenshots/).
 
-> Production-style run (one server serves the built app + API + images):
-> `cd web && npm run build && npm run api` → http://localhost:8787
+> **Build / deploy:** `npm run build` produces a fully static `dist/` (SPA + JSON + images),
+> deployable to any static host; preview it locally with `npm run preview`. A `vercel.json` is
+> included. Deploy workflow: run the crawler + `npm run export` locally, commit `web/public/`, push.
 
 ---
 
@@ -107,13 +113,17 @@ Screenshots of every view are in [`web/screenshots/`](web/screenshots/).
 ## 🏗️ Architecture
 
 ```
-crawler/   Python 3.13 — adapters → normalize → SQLite        (data wrangling)
-web/       Vite + React + TS + Express + better-sqlite3        (serving + UI + admin)
-data/      coursecrawler.sqlite + images/  ← the contract between the two
+crawler/   Python 3.13 — adapters → normalize → SQLite              (data wrangling)
+data/      coursecrawler.sqlite + images/                           (crawler output, local only)
+web/scripts/export.ts   SQLite → static JSON  (better-sqlite3, runs locally at build time)
+web/       Vite + React + TS — a fully static SPA, filters in-browser (UI + admin)
+web/public/api/*.json + web/public/images/   ← the committed build inputs
 docs/      PRD, TDD, source research, discovery interview
 ```
 
-The two halves only share the **SQLite file** — no shared code. (Why Python+TS: see TDD §1.)
+There is **no runtime server**: the crawler writes SQLite locally, a one-off **export** dumps
+it to static JSON, and the SPA fetches that JSON once and filters client-side. `better-sqlite3`
+lives only in the export script (local), never on the host. (Why Python+TS: see TDD §1.)
 
 ---
 
@@ -163,8 +173,6 @@ teaser-nav / booking systems; **kinder-camps** — JS + national dilution.)
 - ferienprogramm.ch spans the Winterthur–Thurgau border, so some communes are outside ZH —
   the web layer's Bezirk/`inZH` lookup is the precise canton filter (out-of-canton camps fall
   into an "Ausserkanton" bucket).
-- One open data issue is documented for the crawler:
-  [`docs/ISSUE-jugendsportcamps-urls.md`](docs/ISSUE-jugendsportcamps-urls.md).
 - Topic classification (a nice-to-have filter) is keyword-based; ~good but not perfect.
 - ToS/scraping was treated leniently per project scope (local/personal); revisit before any
   public/commercial use (see PRD §13).

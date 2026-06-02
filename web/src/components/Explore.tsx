@@ -27,10 +27,11 @@ const TOPIC_EMOJI: Record<string, string> = {
 };
 
 export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => void }) {
-  const { t, topic, format } = useMemo(() => makeT(lang), [lang]);
+  const { t, topic, format, locale } = useMemo(() => makeT(lang), [lang]);
   const [meta, setMeta] = useState<Meta | null>(null);
   const [filters, setFilters] = useState<ExploreFilters>(EMPTY);
   const [allCourses, setAllCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
   const [bounds, setBounds] = useState<{ w: number; s: number; e: number; n: number } | null>(null);
   const [detail, setDetail] = useState<{ list: Course[]; idx: number } | null>(null);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -38,6 +39,7 @@ export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => vo
   const [mapReady, setMapReady] = useState(false);
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
   const [geoMsg, setGeoMsg] = useState<string | null>(null);
+  const [hoverId, setHoverId] = useState<string | null>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
   const sheetHRef = useRef(0);
   const appliedOffset = useRef(0);
@@ -64,7 +66,10 @@ export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => vo
   }, [filters, meta]);
 
   useEffect(() => {
-    fetchCourses(query).then((r) => setAllCourses(r.courses)).catch(console.error);
+    fetchCourses(query)
+      .then((r) => setAllCourses(r.courses))
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, [query]);
 
   // The bottom-sheet list = courses inside the current viewport, filtered in-memory (no fetch).
@@ -78,6 +83,8 @@ export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => vo
   const count = visible.length;
 
   const set = (patch: Partial<ExploreFilters>) => setFilters((f) => ({ ...f, ...patch }));
+  const hasFilters = !!(filters.week || filters.topic || filters.format ||
+    filters.ageMin != null || filters.ageMax != null || filters.maxPrice != null);
 
   // Make the browser Back button close the detail overlay (not leave the site): push a
   // history entry when it opens; Back/swipe/Esc all go through history.back() → popstate.
@@ -167,7 +174,7 @@ export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => vo
     if (!filters.week || !meta) return t("anyWeek");
     const w = meta.weeks.find((x) => String(x.isoWeek) === filters.week);
     if (!w) return t("anyWeek");
-    return `${fmtDe(w.startDate)} – ${fmtDe(w.endDate)}`;
+    return `${fmtDe(w.startDate, locale)} – ${fmtDe(w.endDate, locale)}`;
   })();
   const ageStr = meta && (filters.ageMin != null || filters.ageMax != null)
     ? `${filters.ageMin ?? meta.ageMin}–${filters.ageMax ?? meta.ageMax} ${t("ages")}`
@@ -198,6 +205,8 @@ export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => vo
         >
           <ClusteredMarkers
             courses={allCourses}
+            hoverId={hoverId}
+            onHover={setHoverId}
             onSelect={(c) => {
               const i = allCourses.findIndex((x) => x.id === c.id);
               if (i >= 0) setDetail({ list: allCourses, idx: i });
@@ -250,15 +259,35 @@ export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => vo
         onHeightChange={onSheetHeight}
         header={
           <div className="sheet-count">
-            <strong>{count}</strong> {t("results")} <span className="muted">· {t("inThisArea")}</span>
+            {loading
+              ? t("loading")
+              : <><strong>{count}</strong> {t("results")} <span className="muted">· {t("inThisArea")}</span></>}
           </div>
         }
       >
         <div className="sheet-list">
-          {visible.map((c, i) => (
-            <CompactCard key={c.id} course={c} lang={lang} onClick={() => setDetail({ list: visible, idx: i })} />
-          ))}
-          {count === 0 && <p className="sheet-empty">{t("noResults")} — {t("broaden")}</p>}
+          {loading ? (
+            <div className="sheet-loading"><span className="spinner" /></div>
+          ) : count === 0 ? (
+            <div className="sheet-empty">
+              <p className="empty-title">{t("noResultsHere")}</p>
+              <p>{t("zoomOrReset")}</p>
+              {hasFilters && (
+                <button className="reset" onClick={() => setFilters(EMPTY)}>✕ {t("reset")}</button>
+              )}
+            </div>
+          ) : (
+            visible.map((c, i) => (
+              <CompactCard
+                key={c.id}
+                course={c}
+                lang={lang}
+                hovered={c.id === hoverId}
+                onHover={setHoverId}
+                onClick={() => setDetail({ list: visible, idx: i })}
+              />
+            ))
+          )}
         </div>
       </BottomSheet>
 
@@ -317,14 +346,21 @@ function formatLabel(course: Course, fmt: (k: string) => string, various: string
   return `${label}: ${WD[s]}-${WD[e]}`;
 }
 
-function CompactCard({ course, lang, onClick }: { course: Course; lang: Lang; onClick: () => void }) {
+function CompactCard({ course, lang, onClick, hovered, onHover }: {
+  course: Course; lang: Lang; onClick: () => void; hovered: boolean; onHover: (id: string | null) => void;
+}) {
   const { t, topic, format } = makeT(lang);
   const img = course.imagePath ? "/" + course.imagePath : null;
   const ages = course.ageMin != null
     ? (course.ageMin === course.ageMax ? `${course.ageMin}` : `${course.ageMin}–${course.ageMax}`) + ` ${t("ages")}`
     : null;
   return (
-    <article className="ccard" onClick={onClick}>
+    <article
+      className={"ccard" + (hovered ? " hovered" : "")}
+      onClick={onClick}
+      onMouseEnter={() => onHover(course.id)}
+      onMouseLeave={() => onHover(null)}
+    >
       <div className="ccard-img">
         {img ? <img src={img} alt={course.title} loading="lazy" /> : <div className="ccard-ph">{TOPIC_EMOJI[course.topics[0]] ?? "🎒"}</div>}
       </div>
@@ -344,6 +380,6 @@ function CompactCard({ course, lang, onClick }: { course: Course; lang: Lang; on
   );
 }
 
-function fmtDe(iso: string): string {
-  return new Date(iso).toLocaleDateString("de-CH", { day: "numeric", month: "long" });
+function fmtDe(iso: string, locale: string): string {
+  return new Date(iso).toLocaleDateString(locale, { day: "numeric", month: "long" });
 }

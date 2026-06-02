@@ -1,7 +1,60 @@
 # Kids' Holiday Courses & Camps in Canton Zürich — Source Inventory
 
-*Research date: June 2026. Confidence noted per item; unverified items marked **[unverified]**.
-Feeds the "Sources" section of the PRD.*
+*Original research: June 2026. Confidence noted per item; unverified items marked
+**[unverified]**. Feeds the "Sources" section of the PRD.*
+
+*Updated 2026-06-02: implementation status + the discovery (long-tail) layer below. The
+original research inventory further down is preserved as background. (Technical design of the
+discovery pipeline lives in [`TDD.md`](TDD.md) §12.)*
+
+---
+
+## Implementation status (2026-06-02)
+
+Platform sources actually crawled (dataset ≈ **1,090 raw / ~950 active courses**):
+
+| Source | Status | Method | Notes |
+|---|---|---|---|
+| **Feriennet fleet** | ✅ | `adapters/feriennet.py` — one HTML parser, **10 ZH instances** | ferienplausch (regional, ~51 communes) + standalone communes (pfaeffikon, urdorf, neftenbach, thalwil, stadel, horgen, bachenbülach, glattfelden, oberengstringen), found by probing `<commune>.feriennet.projuventute.ch` (unknown → 302 "notfound"). |
+| **ferienprogramm.ch** | ✅ | `adapters/ferienprogramm.py` (static cards) | Winterthur–Thurgau; school-grade→age. |
+| **jugendsportcamps.ch** | ✅ | `adapters/jugendsportcamps.py` — **public JSON API** | National ~880 → kept ~217 in a ZH bbox. Detail URL `/camp/<slug>` (see `ISSUE-jugendsportcamps-urls.md`). |
+| **codora.ch** | ✅ | `adapters/codora.py` (WordPress/MEC) | Zürich coding/robotics. |
+| **friLingue** | ✅ | `adapters/frilingue.py` (static) | Swiss **residential language** camps (mostly non-ZH). |
+| **Logiscool** | ⏸ deferred | — | Booking-widget walled; low ROI (codora covers ZH coding). |
+
+**No headless browser is used** in the platform adapters — every shipped source is a JSON API
+or server-rendered HTML.
+
+## Discovery layer — the long tail
+
+Platform adapters only see providers that *list on a platform*. Independent provider sites (a
+gym's own page, a Wix studio) are invisible to that — which is how we initially missed
+`verabjj.ch`. The discovery layer closes the gap (technical design: [`TDD.md`](TDD.md) §12):
+
+```
+local scout (Startpage search, Swiss IP) → per-domain nav-link crawl → dump pages
+   → Haiku-subagent extraction (small batches) → dedup → ingest source="discovered:<domain>"
+```
+
+- **Must run from a Swiss IP.** The hosted agent egresses US → US-localized, consent/CAPTCHA-
+  walled results that never surface hyperlocal ZH gyms. A residential/VPN Swiss IP via
+  **Startpage** (Google results, no wall, no browser) returns the real Zürich-local results.
+- A broad query matrix surfaced **189 candidate domains**; crawling all of them + small-batch
+  Haiku extraction yielded **~355 discovered courses across ~93 long-tail providers** — dance
+  schools, judo/BJJ clubs, music/theatre camps, science labs, sport weeks, adventure camps:
+  exactly the diversity platforms miss.
+- **Lower trust.** Discovered rows carry `needs_verify=true` + a confidence score; extraction
+  quality is uneven (Haiku sometimes gets a title but misses age/price/dates present in the
+  text). Treat as candidates — badge/gate for any public deploy.
+- **Held-out recall test.** `verabjj.ch` was withheld as ground truth; with the domain cap
+  removed and small extraction batches, the pipeline re-discovers it **organically** (search
+  rank #172 → nav crawl → extraction), confirming general recall rather than a one-off patch.
+- **Caveats:** out-of-canton spill (near-border providers like Baar/ZG, Risch-Rotkreuz/ZG —
+  stored with true commune, filtered by the web layer's `inZH`/Bezirk lookup); discovered
+  courses mostly lack local images (topic placeholder); a verification pass (re-check
+  dates/age/price, clear `needs_verify`) is the recommended next step.
+
+---
 
 ## Executive summary
 

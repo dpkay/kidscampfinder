@@ -1,7 +1,7 @@
 # CourseCrawler — Technical Design Document
 
 *Draft v0.1 — 2026-06-01. Implements [`PRD.md`](./PRD.md). Source map in
-[`research-sources.md`](./research-sources.md).*
+[`RESEARCH-SOURCES.md`](./RESEARCH-SOURCES.md).*
 
 ## 1. Overview
 
@@ -275,3 +275,50 @@ A second SPA route (`#admin`) backed by one endpoint:
   `period_ids`; if so, enumerate and crawl each. (Current page exposed one active period.)
 - Which private providers are JS-rendered (need Playwright) vs. static.
 - Per-commune holiday-KW data availability vs. canton-wide default.
+
+## 14. Discovery pipeline (long-tail)
+
+Platform adapters (§5–6) only reach providers that list on a platform. Independent provider
+sites are caught by a separate **discovery** pipeline (coverage rationale + results in
+[`RESEARCH-SOURCES.md`](RESEARCH-SOURCES.md)).
+
+```
+local scout → candidate domains → per-domain nav-link crawl → dump pages
+   → Haiku-subagent extraction → discovery.ingest() (normalize → dedup → persist)
+```
+
+### 14a. Local scout — `crawler/discovery_local/discover.py`
+Runs **on a Swiss IP** (the hosted env egresses US → consent/CAPTCHA-walled, US-localized
+results). Pure `httpx` + `selectolax`, no browser:
+- **Search:** a query matrix (`TOPICS × REGIONS × year`, DE+EN) against **Startpage**
+  (`/sp/search`, parses `a.result-link`). Startpage serves Google results without the wall;
+  direct Google/Bing scraping is CAPTCHA-blocked, esp. from datacenter/VPN IPs.
+- **Per-domain crawl:** for each candidate domain (known platforms + social filtered out),
+  fetch the homepage and follow **internal nav links** matching `camp|ferien|sommer|kurs|…`.
+  Catches pages **orphaned from `sitemap.xml` but present in the nav** (e.g. verabjj.ch's
+  `/summer-camp-2026`).
+- **Dumps** `discovery_out/{hits.json, social.json, pages/<hash>.json}` (each page = `{url,
+  title, text[:6000]}`, scripts/nav/footer stripped). `discovery_out/` is gitignored scratch.
+
+### 14b. Extraction — Haiku subagents
+Free-form HTML with no common structure ⇒ extraction needs an LLM. Done with **Haiku
+subagents** (the Agent tool, `model:"haiku"`), no API key required — fan out N agents over
+batches of the dumped pages, each following the shared `discovery_out/EXTRACT.md` rules and
+writing a JSON records array.
+- **Batch size drives recall.** 26-page batches under-extracted (missed extractable camps);
+  **~14-page batches with an "be exhaustive" instruction roughly tripled yield** (116→389
+  records over the same pages). Keep batches small.
+- The held-out probe (`verabjj.ch`, withheld as ground truth) is recovered organically only
+  once batch size is right — a recall regression test, not a target to special-case.
+- Extraction *quality* is still uneven (Haiku may capture a title but miss
+  age/price/dates present in the text) → hence `needs_verify` + a recommended verification
+  pass. Productionizing as a headless script: swap subagents for **Claude Haiku API** calls
+  with a forced structured-output tool + prompt caching on `EXTRACT.md`.
+
+### 14c. Ingestion — `crawler/coursecrawler/discovery.py`
+Extractor-agnostic landing zone: takes normalized records, runs them through the shared
+`normalize`/`geo` stages, **dedups** (`rapidfuzz` title+commune vs the existing DB, and
+`url::title` keys so multi-camp pages don't collapse), and upserts as
+`source="discovered:<domain>"` with `raw.needs_verify=true` + `raw.confidence`. CLI:
+`python -m coursecrawler.discovery <records.json>`. The committed `crawler/discovery_seed.json`
+is the reproducible canonical record of the discovered set.

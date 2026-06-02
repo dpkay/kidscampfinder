@@ -3,7 +3,7 @@
 A *discovery* run finds independent provider sites (a gym's own page, a studio's Wix
 site, …) that don't list on any platform we crawl, and extracts course records from their
 free-form pages. Extraction is the hard part: arbitrary HTML with no common structure, so
-it needs an LLM (see docs/discovery.md). This module is the part *after* extraction — it
+it needs an LLM (see docs/TDD.md §14). This module is the part *after* extraction — it
 takes normalized records (however they were produced) and lands them safely in the DB:
 
   records (JSON)  →  Course/Occasion  →  dedup vs existing DB  →  upsert
