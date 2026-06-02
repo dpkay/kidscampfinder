@@ -21,3 +21,6 @@ html_cache/
 
 # local secrets
 web/.env
+
+# discovery scout scratch output (regenerable; raw scraped pages)
+crawler/discovery_local/discovery_out/
