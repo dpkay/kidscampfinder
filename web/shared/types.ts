@@ -1,5 +1,5 @@
 // Shared types across the Express API and the React client.
-// These mirror the SQLite schema (crawler/coursecrawler/schema.sql).
+// These mirror the SQLite schema (crawler/kidscampfinder/schema.sql).
 
 export interface Occasion {
   startDate: string | null;

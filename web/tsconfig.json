@@ -17,7 +17,7 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "types": ["node"]
+    "types": ["node", "google.maps", "vite/client"]
   },
-  "include": ["src", "server", "shared"]
+  "include": ["src", "shared"]
 }

@@ -163,7 +163,6 @@ export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => vo
     return (
       <div className="explore-missing">
         <p>🗺️ Google Maps key not configured — add <code>VITE_GOOGLE_MAPS_API_KEY</code> to <code>web/.env</code>.</p>
-        <button className="cta" onClick={onBack}>← {t("close")}</button>
       </div>
     );
   }

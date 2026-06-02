@@ -18,7 +18,7 @@ export function Admin({ lang, onBack }: { lang: Lang; onBack: () => void }) {
         <div className="brand">
           <span className="logo">📊</span>
           <div>
-            <h1>CourseCrawler · Admin</h1>
+            <h1>KidsCampFinder · Admin</h1>
             <p className="sub">Crawl health · metadata coverage · true potential</p>
           </div>
         </div>

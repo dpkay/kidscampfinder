@@ -169,7 +169,7 @@ def report(conn: sqlite3.Connection) -> None:
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="CourseCrawler crawl runner")
+    p = argparse.ArgumentParser(description="KidsCampFinder crawl runner")
     p.add_argument("--only", nargs="*", help="only run these sources")
     p.add_argument("--no-cache", action="store_true", help="bypass HTML cache")
     p.add_argument("--limit", type=int, default=0, help="max records per source (testing)")

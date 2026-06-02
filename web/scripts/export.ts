@@ -12,7 +12,7 @@ import { communeInfo, bezirkSortKey } from "../shared/bezirk.ts";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // scripts/ -> web/ -> repo root
 const REPO_ROOT = path.resolve(__dirname, "..", "..");
-const DB_PATH = process.env.CC_DB ?? path.join(REPO_ROOT, "data", "coursecrawler.sqlite");
+const DB_PATH = process.env.CC_DB ?? path.join(REPO_ROOT, "data", "kidscampfinder.sqlite");
 const OUT_DIR = path.join(__dirname, "..", "public", "api");
 
 if (!fs.existsSync(DB_PATH)) {

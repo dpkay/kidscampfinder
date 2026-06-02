@@ -1,4 +1,4 @@
-# CourseCrawler — Technical Design Document
+# KidsCampFinder — Technical Design Document
 
 *Draft v0.1 — 2026-06-01. Implements [`PRD.md`](./PRD.md). Source map in
 [`SOURCES.md`](./SOURCES.md).*
@@ -10,15 +10,15 @@ Two halves, integrated by a **SQLite file**:
 - **`crawler/`** (Python 3.13) — adapters scrape sources → normalize → write SQLite.
 - **`web/`** (TypeScript, Vite + React, `better-sqlite3`) — reads SQLite → filterable UI.
 
-The SQLite DB at `data/coursecrawler.sqlite` is the only contract. The web tier never imports
+The SQLite DB at `data/kidscampfinder.sqlite` is the only contract. The web tier never imports
 Python; the crawler never imports TS. Schema lives in `crawler/schema.sql`; TS types are
 hand-mirrored in `web/src/types.ts` (small, stable surface — codegen is overkill for v1).
 
 ```
-coursecrawler/
+kidscampfinder/
   crawler/
     pyproject.toml
-    coursecrawler/
+    kidscampfinder/
       __init__.py
       config.py            # source registry, rate limits, paths
       db.py                # SQLite connection, schema init, upsert helpers
@@ -133,7 +133,7 @@ class Adapter(ABC):
 
 Adapters only **extract**; normalization is centralized so all sources share KW derivation,
 topic mapping, snippet/lang/image logic. Each adapter is independently runnable
-(`python -m coursecrawler.run --only feriennet`). An adapter raising mid-stream is caught,
+(`python -m kidscampfinder.run --only feriennet`). An adapter raising mid-stream is caught,
 logged, and counted; it never aborts the whole run.
 
 ## 5. Feriennet fleet adapter (the wedge)
@@ -315,10 +315,10 @@ writing a JSON records array.
   pass. Productionizing as a headless script: swap subagents for **Claude Haiku API** calls
   with a forced structured-output tool + prompt caching on `EXTRACT.md`.
 
-### 14c. Ingestion — `crawler/coursecrawler/discovery.py`
+### 14c. Ingestion — `crawler/kidscampfinder/discovery.py`
 Extractor-agnostic landing zone: takes normalized records, runs them through the shared
 `normalize`/`geo` stages, **dedups** (`rapidfuzz` title+commune vs the existing DB, and
 `url::title` keys so multi-camp pages don't collapse), and upserts as
 `source="discovered:<domain>"` with `raw.needs_verify=true` + `raw.confidence`. CLI:
-`python -m coursecrawler.discovery <records.json>`. The committed `crawler/discovery_seed.json`
+`python -m kidscampfinder.discovery <records.json>`. The committed `crawler/discovery_seed.json`
 is the reproducible canonical record of the discovered set.

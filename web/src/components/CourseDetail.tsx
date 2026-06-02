@@ -100,7 +100,6 @@ export function CourseDetail({
         </svg>
       </button>
       <div className="cd-counter">{index + 1} / {courses.length}</div>
-      {showHint && <div className="cd-swipehint">{t("swipeHint")}</div>}
 
       <div
         className="cd-page"

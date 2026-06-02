@@ -170,7 +170,7 @@ def ingest(records: list[dict]) -> dict[str, Any]:
 
 def main() -> None:
     if len(sys.argv) < 2:
-        print("usage: python -m coursecrawler.discovery <records.json>")
+        print("usage: python -m kidscampfinder.discovery <records.json>")
         raise SystemExit(1)
     records = json.loads(open(sys.argv[1], encoding="utf-8").read())
     if isinstance(records, dict):

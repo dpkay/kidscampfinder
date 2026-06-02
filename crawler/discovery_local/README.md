@@ -37,7 +37,7 @@ python discover.py --max-domains 40
 ## Handoff (extraction → ingest)
 Extraction (turning free-form page text into structured course records) needs an LLM. Two ways:
 - **Hand `discovery_out/` back to Claude** (zip it, or `git add` + commit it) → it extracts
-  records and runs `python -m coursecrawler.discovery <records.json>` (dedups vs the DB,
+  records and runs `python -m kidscampfinder.discovery <records.json>` (dedups vs the DB,
   persists as `discovered:<domain>` with `needs_verify`).
 - **Or run extraction yourself** with an `ANTHROPIC_API_KEY` (see `docs/TDD.md §14` for the
   Claude-Haiku structured-output approach).

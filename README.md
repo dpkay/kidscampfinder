@@ -44,7 +44,7 @@ You need **Python 3.11+** and **Node 20+**.
 cd crawler
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e .
-python -m coursecrawler.run        # crawls everything, ~a few min → data/coursecrawler.sqlite
+python -m kidscampfinder.run        # crawls everything, ~a few min → data/kidscampfinder.sqlite
 ```
 
 **2) Export it to static JSON, then run the app.** The web app is a fully **static** SPA —
@@ -125,7 +125,7 @@ Screenshots of every view are in [`web/screenshots/`](web/screenshots/).
 
 ```
 crawler/   Python 3.13 — adapters → normalize → SQLite              (data wrangling)
-data/      coursecrawler.sqlite + images/                           (crawler output, local only)
+data/      kidscampfinder.sqlite + images/                           (crawler output, local only)
 web/scripts/export.ts   SQLite → static JSON  (better-sqlite3, runs locally at build time)
 web/       Vite + React + TS — a fully static SPA, filters in-browser (UI + admin)
 web/public/api/*.json + web/public/images/   ← the committed build inputs
@@ -143,11 +143,11 @@ lives only in the export script (local), never on the host. (Why Python+TS: see 
 ```bash
 cd crawler && source .venv/bin/activate
 
-python -m coursecrawler.run                          # crawl everything (cached & idempotent)
-python -m coursecrawler.run --only feriennet         # just one source
-python -m coursecrawler.run --only feriennet --limit 20 --skip-images   # quick test
-python -m coursecrawler.run --no-cache               # bypass the HTML cache (fetch fresh)
-python -m coursecrawler.run --report                 # print the dataset report only
+python -m kidscampfinder.run                          # crawl everything (cached & idempotent)
+python -m kidscampfinder.run --only feriennet         # just one source
+python -m kidscampfinder.run --only feriennet --limit 20 --skip-images   # quick test
+python -m kidscampfinder.run --no-cache               # bypass the HTML cache (fetch fresh)
+python -m kidscampfinder.run --report                 # print the dataset report only
 ```
 
 A weekly refresh is just re-running the crawl (e.g. via cron). The runner prints a per-source

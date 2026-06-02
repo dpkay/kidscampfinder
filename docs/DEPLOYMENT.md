@@ -1,6 +1,6 @@
 # Deployment runbook
 
-How CourseCrawler is hosted, how to ship changes, and the non-obvious bits worth knowing.
+How KidsCampFinder is hosted, how to ship changes, and the non-obvious bits worth knowing.
 For *why* it's architected this way, the short version is in `README.md`; this doc is the operational
 reference.
 
@@ -17,7 +17,7 @@ There is **no runtime server** in production. The Express server that exists in 
 SQLite via `better-sqlite3`) is **not** deployed. Instead:
 
 ```
-crawler (Python + SQLite, local)  ->  data/coursecrawler.sqlite + data/images/   (gitignored)
+crawler (Python + SQLite, local)  ->  data/kidscampfinder.sqlite + data/images/   (gitignored)
         |
         |  npm run export   (reads the DB read-only)        cp images
         v                                                     v
@@ -55,7 +55,7 @@ are **committed build inputs**.
 This is the normal recurring task — the crawler runs on your machine, then you publish its output.
 
 ```bash
-# 1. Run the crawler (updates data/coursecrawler.sqlite + downloads images into data/images/)
+# 1. Run the crawler (updates data/kidscampfinder.sqlite + downloads images into data/images/)
 #    (see crawler/ for the exact invocation)
 
 # 2. Regenerate the static JSON from the DB

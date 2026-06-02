@@ -8,7 +8,7 @@ import { communeInfo, bezirkSortKey } from "../shared/bezirk.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..", "..");
-const DB_PATH = process.env.CC_DB ?? path.join(REPO_ROOT, "data", "coursecrawler.sqlite");
+const DB_PATH = process.env.CC_DB ?? path.join(REPO_ROOT, "data", "kidscampfinder.sqlite");
 const IMAGE_DIR = path.join(REPO_ROOT, "data", "images");
 const DIST_DIR = path.join(__dirname, "..", "dist");
 const PORT = Number(process.env.PORT ?? 8787);
@@ -356,5 +356,5 @@ if (fs.existsSync(DIST_DIR)) {
 
 app.listen(PORT, () => {
   const { meta } = getData();
-  console.log(`CourseCrawler API on http://localhost:${PORT}  (${meta.total} courses, ${meta.communes.length} communes)`);
+  console.log(`KidsCampFinder API on http://localhost:${PORT}  (${meta.total} courses, ${meta.communes.length} communes)`);
 });

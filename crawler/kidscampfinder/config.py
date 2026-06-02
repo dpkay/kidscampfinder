@@ -3,19 +3,19 @@ from __future__ import annotations
 
 from pathlib import Path
 
-# crawler/coursecrawler/config.py -> repo root is 2 parents up from this file's dir's parent
+# crawler/kidscampfinder/config.py -> repo root is 2 parents up from this file's dir's parent
 PKG_DIR = Path(__file__).resolve().parent
 CRAWLER_DIR = PKG_DIR.parent
 REPO_ROOT = CRAWLER_DIR.parent
 
 DATA_DIR = REPO_ROOT / "data"
-DB_PATH = DATA_DIR / "coursecrawler.sqlite"
+DB_PATH = DATA_DIR / "kidscampfinder.sqlite"
 IMAGE_DIR = DATA_DIR / "images"
 HTML_CACHE_DIR = DATA_DIR / "html_cache"
 SCHEMA_PATH = PKG_DIR / "schema.sql"
 
 USER_AGENT = (
-    "CourseCrawler/0.1 (personal hobby project; aggregates ZH kids' holiday courses)"
+    "KidsCampFinder/0.1 (personal hobby project; aggregates ZH kids' holiday courses)"
 )
 
 # Politeness: minimum seconds between requests to the same host.

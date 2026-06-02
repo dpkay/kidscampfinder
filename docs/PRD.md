@@ -1,4 +1,4 @@
-# CourseCrawler — Product Requirements Document
+# KidsCampFinder — Product Requirements Document
 
 *Draft v0.1 — 2026-06-01. Source inventory lives in [`SOURCES.md`](./SOURCES.md).
 Items marked **[ASSUMPTION]** are my defaults where you didn't specify — flag any you disagree with.*
@@ -7,7 +7,7 @@ Items marked **[ASSUMPTION]** are my defaults where you didn't specify — flag 
 
 ## 1. Summary
 
-CourseCrawler aggregates kids' school-holiday courses and camps across **Canton Zürich**
+KidsCampFinder aggregates kids' school-holiday courses and camps across **Canton Zürich**
 into one searchable place. It automatically crawls the many scattered providers (communal
 Ferienpass programs, cantonal sports camps, private camp providers), normalizes them into a
 single schema, and presents parents a fast filterable browser. Booking stays with the
@@ -267,7 +267,7 @@ the crawler↔frontend contract is the DB, not shared types, that convenience di
 giving up Python's data ecosystem.
 
 ```
-coursecrawler/
+kidscampfinder/
   crawler/      # Python: adapters, runner, normalization, geocoding, dedup → SQLite
                 #   pyproject.toml, schema migrations, the controlled category list
   web/          # Vite + React + TS: serving layer + filterable browser, map, detail view
@@ -352,7 +352,7 @@ Still open:
 These are recorded for the founder, not built in v1.
 
 - **Differentiation vs. Pro Juventute's Elternkompass** (O1): Elternkompass already aggregates
-  the *Feriennet* fleet. CourseCrawler's wedge is **broader coverage** — paid private +
+  the *Feriennet* fleet. KidsCampFinder's wedge is **broader coverage** — paid private +
   cantonal + non-Feriennet sources Elternkompass misses — plus **better filtering** (KW/age/
   location/price) and **English** for the expat market. The goal is explicitly to be *more*
   than a Feriennet directory.
