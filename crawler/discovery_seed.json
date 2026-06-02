@@ -4207,35 +4207,6 @@
    ]
   },
   {
-   "url": "https://judo-club-uster.ch/judo-sommercamp-2026-save-the-date/",
-   "title": "Judo Sommercamp Uster 2026",
-   "provider": "Judo Club Uster",
-   "topics": [
-    "sports"
-   ],
-   "format": "weekly",
-   "cost_type": "paid",
-   "price_chf": 250.0,
-   "age_min": 10,
-   "age_max": 16,
-   "commune": "Uster",
-   "venue_name": "Dojo Judo Club Uster",
-   "language": "de",
-   "description": "30. Judo-Sommercamp letzte Sommerferienwoche; Judo, Selbstverteidigung, inkl. Mittagessen.",
-   "image_url": null,
-   "confidence": 0.7,
-   "query": "discovered",
-   "extractor": "agent",
-   "occasions": [
-    {
-     "start_date": "2026-08-10",
-     "end_date": "2026-08-14",
-     "start_time": "10:00",
-     "end_time": "16:00"
-    }
-   ]
-  },
-  {
    "url": "https://kampfkunstzuerich.ch/selbstverteidigung-zuerich.html",
    "title": "Selbstverteidigung für Mädchen und Frauen in Zürich - KAMPFKUNST ZÜRICH",
    "provider": "Selbstverteidigung für Mädchen und Frauen in Zürich - KAMPFKUNST ZÜRICH",
@@ -9278,76 +9249,6 @@
    "query": "discovered",
    "extractor": "haiku",
    "occasions": []
-  },
-  {
-   "url": "https://www.verabjj.ch/summer-camp-2026#ages6-12",
-   "title": "Vera BJJ Kids Summer Camp — Full Day (Ages 6–12)",
-   "provider": "Vera BJJ",
-   "topics": [
-    "sports"
-   ],
-   "format": "full_day",
-   "cost_type": "paid",
-   "price_chf": 750.0,
-   "age_min": 6,
-   "age_max": 12,
-   "commune": "Zürich",
-   "venue_name": "Rietberg Montessori School",
-   "language": "en",
-   "description": "Brazilian Jiu-Jitsu summer camp at Rietberg Montessori School Zürich. Half/Full day (9:00–16:00) for ages 6–12: Jiu-Jitsu training, team games, creative workshops, outdoor activities, anti-bullying & self-defense.",
-   "image_url": "https://primary.jwwb.nl/public/r/h/b/temp-rffzknhcozzszrjlqadd/img_2132-high.jpg?enable-io=true&enable=upscale&fit=bounds&width=1200",
-   "confidence": 0.85,
-   "query": null,
-   "extractor": "manual (URL provided by user; NOT found by search — verabjj.ch does not surface in our search backend)",
-   "occasions": [
-    {
-     "start_date": "2026-08-03",
-     "end_date": "2026-08-07",
-     "start_time": "09:00",
-     "end_time": "16:00"
-    },
-    {
-     "start_date": "2026-08-10",
-     "end_date": "2026-08-14",
-     "start_time": "09:00",
-     "end_time": "16:00"
-    }
-   ]
-  },
-  {
-   "url": "https://www.verabjj.ch/summer-camp-2026",
-   "title": "Vera BJJ Kids Summer Camp — Morning (Ages 4–5)",
-   "provider": "Vera BJJ",
-   "topics": [
-    "sports"
-   ],
-   "format": "half_day",
-   "cost_type": "paid",
-   "price_chf": 450.0,
-   "age_min": 4,
-   "age_max": 5,
-   "commune": "Zürich",
-   "venue_name": "Rietberg Montessori School",
-   "language": "en",
-   "description": "Brazilian Jiu-Jitsu summer camp at Rietberg Montessori School Zürich. Morning program (9:00–12:00) for ages 4–5: playful games, intro to Jiu-Jitsu, lunch & ice cream.",
-   "image_url": "https://primary.jwwb.nl/public/r/h/b/temp-rffzknhcozzszrjlqadd/img_2132-high.jpg?enable-io=true&enable=upscale&fit=bounds&width=1200",
-   "confidence": 0.85,
-   "query": null,
-   "extractor": "manual (URL provided by user; NOT found by search — verabjj.ch does not surface in our search backend)",
-   "occasions": [
-    {
-     "start_date": "2026-08-03",
-     "end_date": "2026-08-07",
-     "start_time": "09:00",
-     "end_time": "12:00"
-    },
-    {
-     "start_date": "2026-08-10",
-     "end_date": "2026-08-14",
-     "start_time": "09:00",
-     "end_time": "12:00"
-    }
-   ]
   },
   {
    "url": "https://wassersport-camp.ch/",
