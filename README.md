@@ -2,6 +2,11 @@
 
 > **Find kids' holiday courses and camps across Canton Zürich — all on one map.**
 
+### 🌐 Live demo → **[kidscampfinder.vercel.app](https://kidscampfinder.vercel.app/)**
+
+*(~950 active courses across ~106 sources; works best on mobile — it's map-first. Try the
+📊 admin view at [/#admin](https://kidscampfinder.vercel.app/#admin).)*
+
 During the Swiss school holidays there are hundreds of courses and camps for kids — sports,
 coding, arts, language, nature — but they're scattered across dozens of separate websites,
 mostly in German. Today a parent just Googles and hopes.
