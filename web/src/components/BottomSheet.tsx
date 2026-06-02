@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
 // Draggable bottom sheet with three snap points (collapsed / half / full).
-// Drag the handle to move; release snaps to the nearest point.
-const SNAPS = { collapsed: 0.08, half: 0.45, full: 0.92 }; // fraction of viewport height
+// Grab anywhere on the header; a small flick up/down moves one snap level.
+const SNAPS = { collapsed: 0.1, half: 0.45, full: 0.92 } as const; // fraction of viewport height
 type Snap = keyof typeof SNAPS;
+const ORDER: Snap[] = ["collapsed", "half", "full"];
+const FLICK = 36; // px of drag that counts as a deliberate flick
 
 export function BottomSheet({
   header,
@@ -16,35 +18,42 @@ export function BottomSheet({
   initial?: Snap;
   onHeightChange?: (px: number) => void;
 }) {
-  const [snap, setSnap] = useState<Snap>(initial);
-  const [dragH, setDragH] = useState<number | null>(null); // px height while dragging
+  const [idx, setIdx] = useState(ORDER.indexOf(initial));
+  const [dragH, setDragH] = useState<number | null>(null);
   const startY = useRef(0);
   const startH = useRef(0);
+  const curH = useRef(0);
+  const moved = useRef(false);
+  const idxRef = useRef(idx);
+  idxRef.current = idx;
 
+  const snap = ORDER[idx];
   const vh = () => window.innerHeight;
   const targetH = dragH ?? SNAPS[snap] * vh();
 
-  // notify on settled height (open/close), not during drag, so the map can keep its
-  // visible center fixed as the sheet covers/uncovers the bottom.
   useEffect(() => {
-    onHeightChange?.(SNAPS[snap] * window.innerHeight);
+    onHeightChange?.(SNAPS[ORDER[idx]] * window.innerHeight);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [snap]);
+  }, [idx]);
 
   useEffect(() => {
     if (dragH == null) return;
     const onMove = (e: PointerEvent) => {
       const dy = e.clientY - startY.current;
-      const h = Math.max(40, Math.min(vh() * 0.95, startH.current - dy));
+      if (Math.abs(dy) > 5) moved.current = true;
+      const h = Math.max(48, Math.min(vh() * 0.95, startH.current - dy));
+      curH.current = h;
       setDragH(h);
     };
     const onUp = () => {
-      // snap to nearest
-      const frac = (dragH ?? 0) / vh();
-      const nearest = (Object.entries(SNAPS) as [Snap, number][]).reduce((a, b) =>
-        Math.abs(b[1] - frac) < Math.abs(a[1] - frac) ? b : a,
-      )[0];
-      setSnap(nearest);
+      let next = idxRef.current;
+      if (moved.current) {
+        const delta = curH.current - startH.current; // +up, -down
+        if (delta > FLICK) next = Math.min(ORDER.length - 1, idxRef.current + 1);
+        else if (delta < -FLICK) next = Math.max(0, idxRef.current - 1);
+        else next = nearest(curH.current / vh());
+      }
+      setIdx(next);
       setDragH(null);
     };
     window.addEventListener("pointermove", onMove);
@@ -55,24 +64,37 @@ export function BottomSheet({
     };
   }, [dragH]);
 
-  const onHandleDown = (e: React.PointerEvent) => {
+  const onGrab = (e: React.PointerEvent) => {
     startY.current = e.clientY;
     startH.current = targetH;
+    curH.current = targetH;
+    moved.current = false;
     setDragH(targetH);
   };
-
-  const cycle = () => setSnap((s) => (s === "collapsed" ? "half" : s === "half" ? "full" : "collapsed"));
+  const onClick = () => {
+    if (moved.current) return; // it was a drag, not a tap
+    setIdx((i) => (i + 1) % ORDER.length); // tap to cycle
+  };
 
   return (
     <div
       className="sheet"
       style={{ height: targetH, transition: dragH == null ? "height .25s cubic-bezier(.4,0,.2,1)" : "none" }}
     >
-      <div className="sheet-handle-area" onPointerDown={onHandleDown} onClick={cycle}>
+      <div className="sheet-grab" onPointerDown={onGrab} onClick={onClick}>
         <div className="sheet-handle" />
+        <div className="sheet-header">{header}</div>
       </div>
-      <div className="sheet-header">{header}</div>
       <div className="sheet-body">{children}</div>
     </div>
   );
+}
+
+function nearest(frac: number): number {
+  let best = 0, bestD = Infinity;
+  ORDER.forEach((s, i) => {
+    const d = Math.abs(SNAPS[s] - frac);
+    if (d < bestD) { bestD = d; best = i; }
+  });
+  return best;
 }

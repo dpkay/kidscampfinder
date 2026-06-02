@@ -1,19 +1,38 @@
 import type { Course, Meta } from "../shared/types.ts";
+import { applyFilters } from "./filter.ts";
 
 export async function fetchMeta(): Promise<Meta> {
-  const r = await fetch("/api/meta");
+  const r = await fetch("/api/meta.json");
   if (!r.ok) throw new Error("meta failed");
   return r.json();
+}
+
+// The full course set is now static JSON served from the CDN. Fetch it ONCE
+// (cached in a module-level promise) and filter in-memory — same return shape
+// callers always expected from the old /api/courses endpoint.
+let allCoursesPromise: Promise<Course[]> | null = null;
+function loadAllCourses(): Promise<Course[]> {
+  if (!allCoursesPromise) {
+    allCoursesPromise = fetch("/api/courses.json")
+      .then((r) => {
+        if (!r.ok) throw new Error("courses failed");
+        return r.json();
+      })
+      .then((d: { count: number; courses: Course[] }) => d.courses)
+      .catch((e) => {
+        allCoursesPromise = null; // allow retry on failure
+        throw e;
+      });
+  }
+  return allCoursesPromise;
 }
 
 export async function fetchCourses(
   filters: Record<string, string>,
 ): Promise<{ count: number; courses: Course[] }> {
-  const params = new URLSearchParams();
-  for (const [k, v] of Object.entries(filters)) if (v) params.set(k, v);
-  const r = await fetch("/api/courses?" + params.toString());
-  if (!r.ok) throw new Error("courses failed");
-  return r.json();
+  const all = await loadAllCourses();
+  const courses = applyFilters(all, filters);
+  return { count: courses.length, courses };
 }
 
 export interface AdminData {
@@ -46,7 +65,7 @@ export interface AdminData {
 }
 
 export async function fetchAdmin(): Promise<AdminData> {
-  const r = await fetch("/api/admin");
+  const r = await fetch("/api/admin.json");
   if (!r.ok) throw new Error("admin failed");
   return r.json();
 }

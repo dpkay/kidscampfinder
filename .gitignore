@@ -13,6 +13,8 @@ web/node_modules/
 web/dist/
 node_modules/
 
+# committed images are large (~162MB); human decides commit-vs-Blob before deploy
+
 # crawler HTML cache (lives under data/ but ignore stray copies too)
 html_cache/
 

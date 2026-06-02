@@ -60,6 +60,7 @@ const STRINGS: Dict = {
   searchHere: { de: "In diesem Bereich suchen", en: "Search this area" },
   inThisArea: { de: "in diesem Kartenausschnitt", en: "in this map area" },
   swipeHint: { de: "↕ wischen für nächste · ← wegwischen", en: "↕ swipe for next · ← swipe to dismiss" },
+  various: { de: "verschiedene", en: "various" },
   daysAgo: { de: "Tg.", en: "d ago" },
 };
 

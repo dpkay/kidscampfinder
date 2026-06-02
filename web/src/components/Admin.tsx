@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchAdmin, type AdminData } from "../api.ts";
 import { makeT, type Lang } from "../i18n.ts";
-import { prettySource } from "./CourseCard.tsx";
+import { prettySource } from "../util.ts";
 
 export function Admin({ lang, onBack }: { lang: Lang; onBack: () => void }) {
   const { t } = makeT(lang);

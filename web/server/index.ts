@@ -119,6 +119,7 @@ function loadCourses(): Course[] {
 }
 
 function buildMeta(courses: Course[]): Meta {
+  const today = todayISO();
   const communes = new Set<string>();
   const bezirke = new Set<string>();
   const topics = new Set<string>();
@@ -141,9 +142,10 @@ function buildMeta(courses: Course[]): Meta {
     for (const o of c.occasions) {
       if (o.isoYear && o.isoWeekStart) {
         for (let w = o.isoWeekStart; w <= (o.isoWeekEnd ?? o.isoWeekStart); w++) {
+          const { start, end } = isoWeekDates(o.isoYear, w);
+          if (end < today) continue; // don't list weeks that are already over
           const key = `${o.isoYear}-${w}`;
           if (!weekMap.has(key)) {
-            const { start, end } = isoWeekDates(o.isoYear, w);
             weekMap.set(key, { isoYear: o.isoYear, isoWeek: w, startDate: start, endDate: end, courseCount: 0 });
           }
           weekMap.get(key)!.courseCount++;
@@ -160,7 +162,7 @@ function buildMeta(courses: Course[]): Meta {
     topics: [...topics].sort(),
     formats: [...formats].sort(),
     costTypes: [...costTypes].sort(),
-    weeks: [...weekMap.values()].sort((a, b) => a.isoWeek - b.isoWeek),
+    weeks: [...weekMap.values()].sort((a, b) => a.startDate.localeCompare(b.startDate)),
     ageMin: ageMin === 99 ? 0 : ageMin,
     ageMax: ageMax === 0 ? 18 : ageMax,
     maxPrice: Math.ceil(maxPrice / 10) * 10,

@@ -43,8 +43,8 @@ export function FilterSheet({
           <select value={filters.week} onChange={(e) => onChange({ week: e.target.value })}>
             <option value="">{t("allWeeks")}</option>
             {meta.weeks.map((w) => (
-              <option key={w.isoWeek} value={String(w.isoWeek)}>
-                {fmtLong(w.startDate)} – {fmtLong(w.endDate)} · KW {w.isoWeek} ({w.courseCount})
+              <option key={`${w.isoYear}-${w.isoWeek}`} value={String(w.isoWeek)}>
+                {fmtD(w.startDate)} – {fmtD(w.endDate, true)} · KW {w.isoWeek} ({w.courseCount})
               </option>
             ))}
           </select>
@@ -99,6 +99,8 @@ export function FilterSheet({
   );
 }
 
-function fmtLong(iso: string): string {
-  return new Date(iso).toLocaleDateString("de-CH", { day: "numeric", month: "long" });
+function fmtD(iso: string, withYear = false): string {
+  return new Date(iso).toLocaleDateString("de-CH", {
+    day: "numeric", month: "long", ...(withYear ? { year: "numeric" } : {}),
+  });
 }

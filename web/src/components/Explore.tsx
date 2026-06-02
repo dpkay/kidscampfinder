@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import type { Course, Meta } from "../../shared/types.ts";
 import { fetchCourses, fetchMeta } from "../api.ts";
 import { makeT, type Lang } from "../i18n.ts";
@@ -26,7 +26,7 @@ const TOPIC_EMOJI: Record<string, string> = {
   science: "🔬", food: "🧁", academic: "📚", nature: "🌳", other: "✨",
 };
 
-export function Explore({ lang, onBack }: { lang: Lang; onBack?: () => void }) {
+export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => void }) {
   const { t, topic, format } = useMemo(() => makeT(lang), [lang]);
   const [meta, setMeta] = useState<Meta | null>(null);
   const [filters, setFilters] = useState<ExploreFilters>(EMPTY);
@@ -36,6 +36,8 @@ export function Explore({ lang, onBack }: { lang: Lang; onBack?: () => void }) {
   const [filterOpen, setFilterOpen] = useState(false);
   const [sheetH, setSheetH] = useState(0);
   const [mapReady, setMapReady] = useState(false);
+  const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
+  const [geoMsg, setGeoMsg] = useState<string | null>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
   const sheetHRef = useRef(0);
   const appliedOffset = useRef(0);
@@ -77,9 +79,43 @@ export function Explore({ lang, onBack }: { lang: Lang; onBack?: () => void }) {
 
   const set = (patch: Partial<ExploreFilters>) => setFilters((f) => ({ ...f, ...patch }));
 
+  // Make the browser Back button close the detail overlay (not leave the site): push a
+  // history entry when it opens; Back/swipe/Esc all go through history.back() → popstate.
+  const detailOpen = detail !== null;
+  useEffect(() => {
+    if (!detailOpen) return;
+    window.history.pushState({ cd: true }, "");
+    const onPop = () => setDetail(null);
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, [detailOpen]);
+
   const onSheetHeight = (px: number) => {
     sheetHRef.current = px;
     setSheetH(px);
+  };
+
+  const locate = () => {
+    if (!navigator.geolocation) { setGeoMsg("Standort wird nicht unterstützt"); return; }
+    setGeoMsg("Standort wird ermittelt…");
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const p = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        setUserPos(p);
+        setGeoMsg(null);
+        const m = mapRef.current;
+        if (m) {
+          m.setZoom(Math.max(13, m.getZoom() ?? 13));
+          m.panTo(p);
+          // place the located point in the VISIBLE section (above the sheet), not behind it
+          const off = effSheetPx() / 2;
+          if (off > 1) m.panBy(0, off);
+          appliedOffset.current = off;
+        }
+      },
+      (err) => setGeoMsg(err.code === err.PERMISSION_DENIED ? "Standortzugriff verweigert" : "Standort nicht verfügbar (HTTPS nötig)"),
+      { enableHighAccuracy: true, timeout: 8000 },
+    );
   };
 
   // Keep the logical center inside the VISIBLE (uncovered) section: shift the map up by half
@@ -109,6 +145,12 @@ export function Explore({ lang, onBack }: { lang: Lang; onBack?: () => void }) {
     if (mapRef.current && mapReady) recomputeBounds(mapRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sheetH]);
+
+  useEffect(() => {
+    if (!geoMsg || geoMsg.endsWith("…")) return;
+    const id = window.setTimeout(() => setGeoMsg(null), 4000);
+    return () => clearTimeout(id);
+  }, [geoMsg]);
 
   if (!API_KEY) {
     return (
@@ -142,6 +184,8 @@ export function Explore({ lang, onBack }: { lang: Lang; onBack?: () => void }) {
         <Map
           defaultCenter={DEFAULT_CENTER}
           defaultZoom={12}
+          minZoom={7}
+          maxZoom={18}
           gestureHandling="greedy"
           disableDefaultUI={true}
           clickableIcons={false}
@@ -159,12 +203,25 @@ export function Explore({ lang, onBack }: { lang: Lang; onBack?: () => void }) {
               if (i >= 0) setDetail({ list: allCourses, idx: i });
             }}
           />
+          {userPos && (
+            <Marker
+              position={userPos}
+              zIndex={99999}
+              icon={{
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 8, fillColor: "#1a73e8", fillOpacity: 1, strokeColor: "#fff", strokeWeight: 3,
+              }}
+            />
+          )}
         </Map>
       </APIProvider>
 
-      {/* top bar: (optional back) + summary pill + admin */}
+      {/* top bar: language toggle + summary pill + admin */}
       <div className="explore-top">
-        {onBack && <button className="explore-back" onClick={onBack} title={t("close")}>←</button>}
+        <div className="explore-lang">
+          <button className={lang === "de" ? "on" : ""} onClick={() => onLang?.("de")}>DE</button>
+          <button className={lang === "en" ? "on" : ""} onClick={() => onLang?.("en")}>EN</button>
+        </div>
         <button className="summary-pill" onClick={() => setFilterOpen(true)}>
           <span className="sp-line1">{filters.topic ? `${TOPIC_EMOJI[filters.topic] ?? ""} ` : "🔎 "}{line1}</span>
           <span className="sp-line2">{line2}</span>
@@ -173,6 +230,21 @@ export function Explore({ lang, onBack }: { lang: Lang; onBack?: () => void }) {
       </div>
 
       {/* bottom sheet with results */}
+      <button
+        className="explore-locate"
+        style={{ bottom: `calc(${Math.min(sheetH, 0.5 * (typeof window !== "undefined" ? window.innerHeight : 800))}px + 14px)` }}
+        onClick={locate}
+        aria-label="Mein Standort"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <circle cx="12" cy="12" r="7" />
+          <line x1="12" y1="1" x2="12" y2="4" /><line x1="12" y1="20" x2="12" y2="23" />
+          <line x1="1" y1="12" x2="4" y2="12" /><line x1="20" y1="12" x2="23" y2="12" />
+          <circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none" />
+        </svg>
+      </button>
+      {geoMsg && <div className="geo-toast">{geoMsg}</div>}
+
       <BottomSheet
         initial="half"
         onHeightChange={onSheetHeight}
@@ -206,15 +278,47 @@ export function Explore({ lang, onBack }: { lang: Lang; onBack?: () => void }) {
           index={detail.idx}
           lang={lang}
           onIndexChange={(i) => setDetail((d) => (d ? { ...d, idx: i } : d))}
-          onClose={() => setDetail(null)}
+          onClose={() => window.history.back()}
         />
       )}
     </div>
   );
 }
 
+const WD = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]; // getDay() order (Sun=0)
+const weekdayOf = (iso: string) => new Date(iso + "T12:00:00").getDay();
+
+// Format chip with weekdays:
+//   single-day (Ganztag/Halbtag) → distinct days you can pick, e.g. "Ganztag: Mo, Mi"
+//   multi-day  (Mehrtägig/Wochenkurs/Lager) → the session span when all sessions share one
+//     pattern (e.g. "Mehrtägig: Mo-Mi"); if sessions differ → "Mehrtägig: verschiedene".
+function formatLabel(course: Course, fmt: (k: string) => string, various: string): string | null {
+  if (!course.format || course.format === "unknown") return null;
+  const label = fmt(course.format);
+  const occ = course.occasions.filter((o) => o.startDate);
+  if (occ.length === 0) return label;
+
+  if (course.format === "half_day" || course.format === "full_day") {
+    const days = [...new Set(occ.map((o) => weekdayOf(o.startDate!)))].sort((a, b) => a - b);
+    return days.length <= 4 ? `${label}: ${days.map((d) => WD[d]).join(", ")}` : label;
+  }
+
+  // distinct (start→end weekday) session patterns, for real multi-day spans (2–6 days)
+  const pats = new Set<string>();
+  for (const o of occ) {
+    const s = new Date(o.startDate! + "T12:00:00");
+    const e = o.endDate ? new Date(o.endDate + "T12:00:00") : s;
+    const days = Math.round((e.getTime() - s.getTime()) / 86400000) + 1;
+    if (days >= 2 && days < 7) pats.add(`${s.getDay()}-${e.getDay()}`);
+  }
+  if (pats.size === 0) return label; // no usable span (missing end dates / week+ camp)
+  if (pats.size > 1) return `${label}: ${various}`;
+  const [s, e] = [...pats][0].split("-").map(Number);
+  return `${label}: ${WD[s]}-${WD[e]}`;
+}
+
 function CompactCard({ course, lang, onClick }: { course: Course; lang: Lang; onClick: () => void }) {
-  const { t, topic } = makeT(lang);
+  const { t, topic, format } = makeT(lang);
   const img = course.imagePath ? "/" + course.imagePath : null;
   const ages = course.ageMin != null
     ? (course.ageMin === course.ageMax ? `${course.ageMin}` : `${course.ageMin}–${course.ageMax}`) + ` ${t("ages")}`
@@ -229,6 +333,7 @@ function CompactCard({ course, lang, onClick }: { course: Course; lang: Lang; on
         <div className="ccard-chips">
           {course.weekLabel && <span className="chip week">{course.weekLabel}</span>}
           {ages && <span className="chip">{ages}</span>}
+          {(() => { const fl = formatLabel(course, format, t("various")); return fl && <span className="chip">{fl}</span>; })()}
           {course.costType === "free"
             ? <span className="chip free">{t("free")}</span>
             : course.priceChf != null ? <span className="chip price">CHF {Math.round(course.priceChf)}</span> : null}
