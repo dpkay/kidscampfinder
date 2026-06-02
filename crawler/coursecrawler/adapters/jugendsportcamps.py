@@ -83,7 +83,7 @@ class JugendsportcampsAdapter(Adapter):
         slug = camp.get("slug")
         if not title or not slug:
             return None
-        url = f"https://www.jugendsportcamps.ch/de/camp/{slug}"
+        url = f"https://www.jugendsportcamps.ch/camp/{slug}"
 
         commune = _commune_from_city(camp.get("city", ""))
         price = camp.get("price")

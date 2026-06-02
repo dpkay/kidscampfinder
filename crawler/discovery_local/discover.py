@@ -1,30 +1,26 @@
-"""Local discovery scout — RUN THIS ON YOUR OWN MACHINE (ideally NordVPN → Switzerland).
+"""Local discovery scout — finds long-tail ZH kids' camp providers.
 
-WHY LOCAL: the hosted agent egresses from a US datacenter, so Google serves US-localized,
-consent/CAPTCHA-walled results and never surfaces hyperlocal Zürich providers — that's how we
-missed verabjj.ch (a Zürich gym whose camp ranks #2 on *your* Swiss Google but is invisible
-from a US IP). Running here, from a residential Swiss IP in a real browser, Google returns the
-same Zürich-local results you see.
+WHY IT MUST RUN LOCALLY (on a Swiss IP): search results are geo-localized. From a US egress,
+Google/Startpage return US results and never surface hyperlocal Zürich providers (that's how we
+missed verabjj.ch). From a Swiss IP (your machine, or NordVPN→CH) the same search returns the
+Zürich-local results you see in your browser — verified: Startpage surfaces verabjj.ch from CH.
+
+SEARCH BACKEND: **Startpage** (serves Google results) via plain HTTP. Chosen because direct
+Google scraping is CAPTCHA-walled (especially from VPN/datacenter IPs) and Bing CAPTCHA'd too,
+but Startpage returned full Swiss-localized Google results with no wall and no browser needed.
 
 PIPELINE
-  geo-localized Google search (Playwright, real browser)   # solves geo + consent + JS
-    → candidate provider domains (+ social links kept aside)
-    → crawl each site's homepage + nav/internal links for camp pages (httpx)   # finds the
-       /summer-camp-2026 page even when it's missing from sitemap.xml (it's in the nav)
-    → dump {url, title, text} to ./discovery_out/
+  Startpage search (query matrix, Swiss-localized)
+    → candidate provider domains (+ social links set aside)
+    → crawl each site's homepage + nav/internal links for camp pages   # catches pages
+       orphaned from sitemap.xml but present in the nav (verabjj.ch/summer-camp-2026)
+    → dump {url,title,text} to ./discovery_out/
 
-HANDOFF: zip/commit ./discovery_out/ and hand it back to Claude → it extracts structured
-course records and runs `python -m coursecrawler.discovery <records.json>`. (Or run extraction
-yourself with an LLM key — see docs/discovery.md.)
+HANDOFF: commit/zip ./discovery_out/ → Claude extracts structured records → discovery.ingest().
 
-SETUP (on your machine)
-  python3 -m venv .venv && source .venv/bin/activate
-  pip install playwright httpx selectolax
-  playwright install chromium
-  # connect NordVPN to Switzerland, then:
+SETUP
+  pip install httpx selectolax        # no browser needed
   python discover.py --max-domains 40
-
-The search step needs the real browser (Playwright). The site-crawl step is plain httpx.
 """
 from __future__ import annotations
 
@@ -42,32 +38,47 @@ from selectolax.parser import HTMLParser
 OUT = Path(__file__).parent / "discovery_out"
 PAGES = OUT / "pages"
 
-# Platforms we already crawl via dedicated adapters — skip as candidates.
 KNOWN_PLATFORMS = {
     "feriennet.projuventute.ch", "projuventute.ch", "kompass.projuventute.ch",
     "ferienprogramm.ch", "jugendsportcamps.ch", "zh.ch", "codora.ch", "frilingue.ch",
-    "stadt-zuerich.ch",
+    "stadt-zuerich.ch", "startpage.com",
 }
-SOCIAL = {"instagram.com", "facebook.com", "tiktok.com", "youtube.com", "linkedin.com"}
+SOCIAL = {"instagram.com", "facebook.com", "tiktok.com", "youtube.com", "linkedin.com",
+          "twitter.com", "x.com", "reddit.com", "mastodon.social", "pinterest.com"}
 
-# Query matrix: topic × (region) × holiday, DE + EN. Edit/extend freely.
-TOPICS_DE = ["sommercamp", "ferienkurs", "ferienlager", "tagescamp", "kampfsport ferien",
-             "tanz ferienkurs", "musik ferienkurs", "kunst ferienworkshop", "reitlager",
-             "schwimmkurs ferien", "wissenschaft feriencamp", "koch kurs kinder ferien"]
+# Broad topic net — ~30 mainstream kids'-camp categories (DE). Martial arts / jiu-jitsu is
+# included as one category among many (legit coverage), NOT as a pointer to any one provider.
+TOPICS_DE = [
+    "sommercamp", "ferienkurs", "ferienlager", "tagescamp", "feriencamp",
+    "kampfsport ferien", "jiu jitsu kinder", "judo karate ferien",
+    "tanz ferienkurs", "ballett ferienkurs", "hip hop tanzcamp",
+    "musik ferienkurs", "gesang ferienkurs", "band feriencamp",
+    "kunst ferienworkshop", "malen ferienkurs", "töpfern ferienkurs",
+    "reitlager", "ponylager", "schwimmkurs ferien", "segel ferienlager",
+    "wissenschaft feriencamp", "robotik ferienkurs", "programmieren ferienkurs",
+    "kochkurs kinder ferien", "zirkus ferienkurs", "kletter feriencamp",
+    "fussball feriencamp", "tennis feriencamp", "theater ferienkurs",
+    "foto ferienkurs", "abenteuer feriencamp", "natur ferienkurs", "bauernhof ferien kinder",
+]
 TOPICS_EN = ["summer camp kids", "holiday camp children", "jiu jitsu kids summer camp",
-             "coding camp kids", "theatre camp kids", "science camp kids"]
-REGIONS = ["zürich", "winterthur", "zürich oberland", "zürich see", "uster", "dietikon"]
+             "martial arts kids camp", "coding camp kids", "theatre camp kids",
+             "science camp kids", "dance camp kids", "art camp kids"]
+REGIONS = ["zürich", "winterthur", "zürich oberland", "uster"]
 YEAR = "2026"
+
+UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
 
 
 def queries() -> list[str]:
     qs = []
-    for t in TOPICS_DE:
-        for r in REGIONS[:3]:
-            qs.append(f"{t} kinder {r} {YEAR}")
+    # every topic × Zürich; plus every 2nd topic also × Winterthur/Oberland for spread
+    for i, t in enumerate(TOPICS_DE):
+        qs.append(f"{t} kinder zürich {YEAR}")
+        if i % 2 == 0:
+            qs.append(f"{t} kinder {REGIONS[i % len(REGIONS)]} {YEAR}")
     for t in TOPICS_EN:
-        qs.append(f"{t} {REGIONS[0]} {YEAR}")
-    # dedupe, keep order
+        qs.append(f"{t} zürich {YEAR}")
     seen, out = set(), []
     for q in qs:
         if q not in seen:
@@ -82,35 +93,18 @@ def domain_of(url: str) -> str:
 
 # ----------------------------------------------------------------------------- search
 
-def google_search(query: str, page) -> list[dict]:
-    """Scrape one Google results page using a real browser (handles consent + JS)."""
-    page.goto(
-        "https://www.google.com/search?" + httpx.QueryParams(
-            {"q": query, "hl": "de", "gl": "ch", "num": "20"}
-        ).__str__(),
-        wait_until="domcontentloaded",
-        timeout=30000,
-    )
-    # consent: click "Alle akzeptieren" / "Accept all" if the dialog shows
-    for label in ("Alle akzeptieren", "Accept all", "Ich stimme zu", "I agree"):
-        try:
-            btn = page.get_by_role("button", name=label)
-            if btn.count():
-                btn.first.click(timeout=2500)
-                page.wait_for_timeout(800)
-                break
-        except Exception:
-            pass
-    page.wait_for_timeout(1200)
+def startpage_search(query: str, client: httpx.Client) -> list[dict]:
+    """Startpage serves Google results; organic links are <a class='result-link'>."""
+    r = client.get("https://www.startpage.com/sp/search",
+                   params={"query": query, "cat": "web", "language": "deutsch"})
+    if r.status_code != 200:
+        return []
+    tree = HTMLParser(r.text)
     hits = []
-    # organic results: anchors that wrap an <h3>
-    for a in page.query_selector_all("a:has(h3)"):
-        href = a.get_attribute("href") or ""
-        if not href.startswith("http"):
-            continue
-        h3 = a.query_selector("h3")
-        title = h3.inner_text() if h3 else ""
-        hits.append({"url": href, "title": title, "query": query})
+    for a in tree.css("a.result-link"):
+        href = a.attributes.get("href", "")
+        if href.startswith("http") and "startpage.com" not in href:
+            hits.append({"url": href, "title": a.text(strip=True), "query": query})
     return hits
 
 
@@ -120,11 +114,6 @@ CAMP_HINT = re.compile(r"(camp|ferien|sommer|summer|holiday|kurs|lager|workshop|
 
 
 def crawl_site(domain: str, client: httpx.Client, max_pages: int = 6) -> list[dict]:
-    """Fetch a provider's homepage, follow internal nav links to camp-ish pages, dump text.
-
-    Catches pages orphaned from sitemap.xml but present in the nav (e.g. verabjj.ch's
-    /summer-camp-2026).
-    """
     base = f"https://{domain}/"
     pages: list[dict] = []
     try:
@@ -136,99 +125,74 @@ def crawl_site(domain: str, client: httpx.Client, max_pages: int = 6) -> list[di
 
     def keep(html: str, url: str):
         tree = HTMLParser(html)
-        for s in tree.css("script,style,nav,footer,header"):
+        for s in tree.css("script,style,nav,footer,header,svg,noscript"):
             s.decompose()
         text = re.sub(r"\s+", " ", tree.text()).strip()
-        pages.append({"url": url, "title": _title(tree), "text": text[:6000]})
+        title_el = tree.css_first("title")
+        pages.append({"url": url, "title": title_el.text(strip=True) if title_el else "",
+                      "text": text[:6000]})
 
     keep(home.text, base)
-
-    # internal links that look camp-related
     tree = HTMLParser(home.text)
     seen = {base}
     candidates = []
     for a in tree.css("a[href]"):
-        href = a.attributes.get("href", "")
-        full = urljoin(base, href)
+        full = urljoin(base, a.attributes.get("href", ""))
         if domain_of(full) != domain or full in seen:
             continue
-        link_txt = (a.text() or "") + " " + href
-        if CAMP_HINT.search(link_txt):
-            seen.add(full)
-            candidates.append(full)
-
+        if CAMP_HINT.search((a.text() or "") + " " + a.attributes.get("href", "")):
+            seen.add(full); candidates.append(full)
     for url in candidates[: max_pages - 1]:
         try:
             r = client.get(url)
             if r.status_code == 200 and "text/html" in r.headers.get("content-type", ""):
                 keep(r.text, url)
-            time.sleep(0.5)
+            time.sleep(0.4)
         except Exception:
             continue
     return pages
 
 
-def _title(tree: HTMLParser) -> str:
-    t = tree.css_first("title")
-    return t.text(strip=True) if t else ""
-
-
 # ----------------------------------------------------------------------------- main
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Local discovery scout (run on your machine, VPN→CH)")
+    ap = argparse.ArgumentParser(description="Local discovery scout (run on a Swiss IP)")
     ap.add_argument("--max-domains", type=int, default=40)
-    ap.add_argument("--max-queries", type=int, default=0, help="limit queries (0 = all)")
-    ap.add_argument("--headful", action="store_true", help="show the browser (debug)")
+    ap.add_argument("--max-queries", type=int, default=0)
     args = ap.parse_args()
 
     OUT.mkdir(exist_ok=True)
     PAGES.mkdir(exist_ok=True)
-
-    from playwright.sync_api import sync_playwright
-
     qs = queries()
     if args.max_queries:
         qs = qs[: args.max_queries]
-    print(f"[scout] {len(qs)} queries")
+    print(f"[scout] {len(qs)} queries via Startpage")
 
     all_hits: list[dict] = []
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=not args.headful)
-        ctx = browser.new_context(locale="de-CH",
-                                   user_agent=("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                                               "AppleWebKit/537.36 (KHTML, like Gecko) "
-                                               "Chrome/120.0 Safari/537.36"))
-        page = ctx.new_page()
+    with httpx.Client(follow_redirects=True, timeout=25, headers={"User-Agent": UA}) as client:
         for q in qs:
             try:
-                hits = google_search(q, page)
+                hits = startpage_search(q, client)
                 print(f"   '{q}' → {len(hits)} hits")
                 all_hits.extend(hits)
-                time.sleep(1.5)
+                time.sleep(2.0)  # be polite to Startpage
             except Exception as e:
                 print(f"   ! query failed '{q}': {e}")
-        browser.close()
 
-    (OUT / "hits.json").write_text(json.dumps(all_hits, ensure_ascii=False, indent=1))
+        (OUT / "hits.json").write_text(json.dumps(all_hits, ensure_ascii=False, indent=1))
 
-    # candidate domains (exclude platforms); keep social links aside
-    social_hits, domains = [], []
-    seen_d = set()
-    for h in all_hits:
-        d = domain_of(h["url"])
-        if d in SOCIAL:
-            social_hits.append(h); continue
-        if d in KNOWN_PLATFORMS or not d or d in seen_d:
-            continue
-        seen_d.add(d); domains.append(d)
-    domains = domains[: args.max_domains]
-    (OUT / "social.json").write_text(json.dumps(social_hits, ensure_ascii=False, indent=1))
-    print(f"[scout] {len(domains)} candidate domains, {len(social_hits)} social links")
+        social_hits, domains, seen_d = [], [], set()
+        for h in all_hits:
+            d = domain_of(h["url"])
+            if d in SOCIAL:
+                social_hits.append(h); continue
+            if d in KNOWN_PLATFORMS or not d or d in seen_d:
+                continue
+            seen_d.add(d); domains.append(d)
+        domains = domains[: args.max_domains]
+        (OUT / "social.json").write_text(json.dumps(social_hits, ensure_ascii=False, indent=1))
+        print(f"[scout] {len(domains)} candidate domains, {len(social_hits)} social links")
 
-    # crawl each candidate site
-    with httpx.Client(follow_redirects=True, timeout=20,
-                      headers={"User-Agent": "Mozilla/5.0 (compatible; coursecrawler-scout)"}) as client:
         for i, d in enumerate(domains, 1):
             print(f"   [{i}/{len(domains)}] crawl {d}")
             for pg in crawl_site(d, client):
@@ -236,8 +200,8 @@ def main() -> None:
                 (PAGES / f"{key}.json").write_text(json.dumps(pg, ensure_ascii=False, indent=1))
 
     n = len(list(PAGES.glob("*.json")))
-    print(f"\n[scout] done. {n} candidate pages saved to {PAGES}")
-    print("        zip/commit discovery_out/ and hand it to Claude for extraction → ingest.")
+    print(f"\n[scout] done. {n} candidate pages → {PAGES}")
+    print("        hand discovery_out/ to Claude for extraction → ingest.")
 
 
 if __name__ == "__main__":
