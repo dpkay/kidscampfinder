@@ -88,6 +88,30 @@ cd web && vercel deploy --prod
 Note: a CLI `vercel deploy` from `web/` uploads your *local* `web/` directory — it does not build from
 GitHub. For a faithful "deploy what's on main" build, push to `main` or use the dashboard Redeploy.
 
+## Verifying a deploy is live
+
+A push to `main` is **not** instantly live — Vercel builds for ~1–2 min, then promotes the new build to
+the production alias. The reliable test: **the current `READY` production deployment's commit SHA matches
+the tip of `origin/main`.**
+
+```bash
+# the commit you expect to be live:
+git rev-parse origin/main
+
+# what's actually live — pick one:
+#  a) Dashboard: vercel.com/dominik-kaesers-projects/kidscampfinder → Deployments
+#     → the top "Production · Ready" entry shows its commit; match it to the SHA above.
+#  b) CLI:
+vercel ls kidscampfinder          # recent deployments + state (Ready/Building) + age
+vercel inspect <deployment-url>   # shows meta.githubCommitSha for an exact match
+```
+
+When the SHAs match and state is `READY`, the latest code is live. Caveats:
+- **Build lag:** until the new build is `READY` and promoted, the alias still serves the *previous* deploy.
+- **Browser cache:** the alias flips instantly on promotion; hard-refresh if your browser caches.
+- **Code-live ≠ data-live:** this confirms the committed code + JSON are live. Fresh *crawl data* only goes
+  live after the export → commit → push flow above.
+
 ## Environment variables — Google Maps key (two-key split)
 
 The map needs `VITE_GOOGLE_MAPS_API_KEY`. Because it's a `VITE_` var it is **compiled into the public
