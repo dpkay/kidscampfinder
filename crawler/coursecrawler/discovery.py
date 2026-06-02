@@ -113,7 +113,9 @@ def _to_course(rec: dict) -> Course:
 
     course = Course(
         source=f"discovered:{domain}",
-        source_key=url,
+        # include the title: one page (URL) can list many distinct camps — keying on URL
+        # alone would collapse them into a single course.
+        source_key=f"{url}::{rec['title']}",
         source_url=url,
         title=rec["title"],
         description_full=desc,

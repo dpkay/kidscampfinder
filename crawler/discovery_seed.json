@@ -1,6 +1,276 @@
 {
  "records": [
   {
+   "url": "https://www.camprock.ch/camps/anmeldungen/",
+   "title": "Camp Rock - Abenteuer Camp I",
+   "provider": "Camp Rock",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": null,
+   "age_max": null,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Week-long adventure camp for kids during summer holidays.",
+   "image_url": null,
+   "confidence": 0.75,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-05",
+     "end_date": "2026-07-11",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://www.camprock.ch/camps/anmeldungen/",
+   "title": "Camp Rock - Action Camp II",
+   "provider": "Camp Rock",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": null,
+   "age_max": null,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Week-long action and adventure camp for kids during spring holidays.",
+   "image_url": null,
+   "confidence": 0.75,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-04-19",
+     "end_date": "2026-04-25",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://www.camprock.ch/camps/anmeldungen/",
+   "title": "Camp Rock - Erlebnis Camp I",
+   "provider": "Camp Rock",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": null,
+   "age_max": null,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Week-long experience camp for kids during autumn holidays.",
+   "image_url": null,
+   "confidence": 0.75,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-09-27",
+     "end_date": "2026-10-03",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://www.camprock.ch/camps/anmeldungen/",
+   "title": "Camp Rock - Explosion Camp",
+   "provider": "Camp Rock",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": 13,
+   "age_max": 17,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Autumn holiday camp for teenagers.",
+   "image_url": null,
+   "confidence": 0.75,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-10-04",
+     "end_date": "2026-10-10",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://www.camprock.ch/camps/anmeldungen/",
+   "title": "Camp Rock - Fun Camp",
+   "provider": "Camp Rock",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": 13,
+   "age_max": 17,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Spring holiday fun camp for teenagers.",
+   "image_url": null,
+   "confidence": 0.75,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-04-12",
+     "end_date": "2026-04-18",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://www.camprock.ch/camps/anmeldungen/",
+   "title": "Camp Rock - Generation Camp",
+   "provider": "Camp Rock",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 195.0,
+   "age_min": null,
+   "age_max": null,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Special camp during Ascension holidays.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-05-14",
+     "end_date": "2026-05-17",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://www.camprock.ch/camps/anmeldungen/",
+   "title": "Camp Rock - Hey You Camp I",
+   "provider": "Camp Rock",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": 13,
+   "age_max": 17,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Summer holiday camp for teenagers.",
+   "image_url": null,
+   "confidence": 0.75,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-26",
+     "end_date": "2026-08-01",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://www.camprock.ch/camps/anmeldungen/",
+   "title": "Camp Rock - Holy Days",
+   "provider": "Camp Rock",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 210.0,
+   "age_min": null,
+   "age_max": null,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Special programme camp in November.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-11-06",
+     "end_date": "2026-11-08",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://www.camprock.ch/camps/anmeldungen/",
+   "title": "Camp Rock - Silvester Camp",
+   "provider": "Camp Rock",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": 10,
+   "age_max": 16,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Winter holiday camp for teenagers around New Year's Eve.",
+   "image_url": null,
+   "confidence": 0.75,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-12-27",
+     "end_date": "2027-01-02",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
    "url": "https://www.closeencounterstheatre.com/register-for-holiday-camps",
    "title": "Summer Kids Theatre Camp",
    "provider": "Close Encounters Theatre",
@@ -30,6 +300,1219 @@
     {
      "start_date": "2026-08-10",
      "end_date": "2026-08-10",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://dancegallery.ch/angebot/dance-fun-ferienangebot/",
+   "title": "Dance&Fun Ferienkurs Dietlikon 5. Woche",
+   "provider": "Dance Gallery",
+   "topics": [
+    "arts"
+   ],
+   "format": "full_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": 6,
+   "age_max": 11,
+   "commune": "Dietlikon",
+   "venue_name": "Studio Dietlikon",
+   "language": "de",
+   "description": "Tanzferienkurs mit Tanz, Bewegung, Kreativität, Spiel und Spass für Kinder der 1.-5. Klasse. Täglich verschiedene Schwerpunkte: T-Shirt gestalten, Tanzstile kennenlernen, Tanzclip drehen, Fotoshooting.",
+   "image_url": null,
+   "confidence": 0.9,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-08-10",
+     "end_date": "2026-08-14",
+     "start_time": "08:30",
+     "end_time": "15:30"
+    }
+   ]
+  },
+  {
+   "url": "https://dancegallery.ch/angebot/dance-fun-ferienangebot/",
+   "title": "Dance&Fun Ferienkurs Effretikon 1. Woche",
+   "provider": "Dance Gallery",
+   "topics": [
+    "arts"
+   ],
+   "format": "full_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": 6,
+   "age_max": 11,
+   "commune": "Effretikon",
+   "venue_name": "Studio Effretikon",
+   "language": "de",
+   "description": "Tanzferienkurs mit Tanz, Bewegung, Kreativität, Spiel und Spass für Kinder der 1.-5. Klasse. Täglich verschiedene Schwerpunkte: T-Shirt gestalten, Tanzstile kennenlernen, Tanzclip drehen, Fotoshooting.",
+   "image_url": null,
+   "confidence": 0.9,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-13",
+     "end_date": "2026-07-17",
+     "start_time": "08:30",
+     "end_time": "15:30"
+    }
+   ]
+  },
+  {
+   "url": "https://dancegallery.ch/news/workshops-kurse/",
+   "title": "Heels Dance Workshop",
+   "provider": "Dance Gallery",
+   "topics": [
+    "arts"
+   ],
+   "format": "half_day",
+   "cost_type": "paid",
+   "price_chf": 30.0,
+   "age_min": 15,
+   "age_max": null,
+   "commune": "Dietlikon",
+   "venue_name": "Neue Winterthurerstrasse 30a",
+   "language": "de",
+   "description": "Single workshop session learning heels dance technique with modern choreography.",
+   "image_url": null,
+   "confidence": 0.5,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-06-27",
+     "end_date": "2026-06-27",
+     "start_time": "14:00",
+     "end_time": "15:30"
+    }
+   ]
+  },
+  {
+   "url": "https://dancegallery.ch/news/workshops-kurse/",
+   "title": "Partnering & Floorwork Workshop",
+   "provider": "Dance Gallery",
+   "topics": [
+    "arts"
+   ],
+   "format": "half_day",
+   "cost_type": "paid",
+   "price_chf": 30.0,
+   "age_min": 13,
+   "age_max": null,
+   "commune": "Dietlikon",
+   "venue_name": "Neue Winterthurerstrasse 30a",
+   "language": "de",
+   "description": "Workshop for learning partnering, leading/following and acro dance techniques.",
+   "image_url": null,
+   "confidence": 0.5,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-06-28",
+     "end_date": "2026-06-28",
+     "start_time": "14:00",
+     "end_time": "15:30"
+    }
+   ]
+  },
+  {
+   "url": "https://faeger.ch/de/programm/entdecke-das-fechten!-(7-11-jaehrig)-2090.html?event_date=9611",
+   "title": "Entdecke das Fechten! (7-11 jährig)",
+   "provider": "FÄGER/Unisport Bern",
+   "topics": [
+    "sports"
+   ],
+   "format": "half_day",
+   "cost_type": "paid",
+   "price_chf": 10.0,
+   "age_min": 7,
+   "age_max": 11,
+   "commune": "Bern",
+   "venue_name": "Unisport Bern",
+   "language": "de",
+   "description": "Fencing introduction for children with floret and sabre, learning rules and tactics.",
+   "image_url": null,
+   "confidence": 0.85,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://judo-club-uster.ch/judo-sommercamp-2026-save-the-date/",
+   "title": "Judo Sommercamp Uster 2026",
+   "provider": "Judo Club Uster",
+   "topics": [
+    "sports"
+   ],
+   "format": "weekly",
+   "cost_type": "paid",
+   "price_chf": 250.0,
+   "age_min": 10,
+   "age_max": 16,
+   "commune": "Uster",
+   "venue_name": "Dojo Judo Club Uster",
+   "language": "de",
+   "description": "30. Judo-Sommercamp letzte Sommerferienwoche; Judo, Selbstverteidigung, inkl. Mittagessen.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "agent",
+   "occasions": [
+    {
+     "start_date": "2026-08-10",
+     "end_date": "2026-08-14",
+     "start_time": "10:00",
+     "end_time": "16:00"
+    }
+   ]
+  },
+  {
+   "url": "https://kikuka.ch/event/Fotomuseum%20Winterthur/19060",
+   "title": "Ausgebucht: Familienworkshop: Camera obscura – Zurück zu den Ursprüngen der Fotografie – KiKuKa",
+   "provider": "Fotomuseum Winterthur",
+   "topics": [
+    "arts",
+    "sports",
+    "languages",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 30.0,
+   "age_min": 4,
+   "age_max": 12,
+   "commune": "Winterthur",
+   "venue_name": "Fotomuseum Winterthur",
+   "language": "de",
+   "description": null,
+   "image_url": null,
+   "confidence": 0.85,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://kikuka.ch/event/spacecake/22213",
+   "title": "Sommerworkshop «So wohnen meine Grosseltern am allerliebsten»",
+   "provider": "spacecake",
+   "topics": [
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 420.0,
+   "age_min": 7,
+   "age_max": 15,
+   "commune": "Zürich",
+   "venue_name": "Wehrenbachhalde",
+   "language": "de",
+   "description": "Art and architecture summer workshop exploring different living forms for elderly.",
+   "image_url": null,
+   "confidence": 0.9,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-13",
+     "end_date": "2026-07-17",
+     "start_time": "10:00",
+     "end_time": "16:00"
+    }
+   ]
+  },
+  {
+   "url": "https://kikuka.ch/event/spacecake/22214",
+   "title": "spacecake Sommerworkshop - Schrebergartencommunity",
+   "provider": "KiKuKa / spacecake",
+   "topics": [
+    "arts",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 420.0,
+   "age_min": 7,
+   "age_max": 15,
+   "commune": "Zürich",
+   "venue_name": "Wehrenbachhalde 10",
+   "language": "de",
+   "description": "Summer holiday workshop for children ages 7-15 designing a community house for gardeners.",
+   "image_url": null,
+   "confidence": 0.9,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-08-10",
+     "end_date": "2026-08-14",
+     "start_time": "10:00",
+     "end_time": "16:00"
+    }
+   ]
+  },
+  {
+   "url": "https://kindersportwoche.ch/camps-und-lager/",
+   "title": "KOW Baden (Summer Session 1)",
+   "provider": "KinderSportWoche",
+   "topics": [
+    "sports"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Baden",
+   "venue_name": "Allmend",
+   "language": "de",
+   "description": "Multi-day sports camp for children with various sports activities.",
+   "image_url": null,
+   "confidence": 0.75,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-06",
+     "end_date": "2026-07-10",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://kindersportwoche.ch/camps-und-lager/preise/",
+   "title": "KinderOutdoorWoche Baden",
+   "provider": "KinderSportWoche",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 360.0,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Baden",
+   "venue_name": "Allmend",
+   "language": "de",
+   "description": "Multi-day outdoor sports holiday camp for children with daily activities from 9am to 4pm.",
+   "image_url": null,
+   "confidence": 0.75,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-08-03",
+     "end_date": "2026-08-07",
+     "start_time": "09:00",
+     "end_time": "16:00"
+    }
+   ]
+  },
+  {
+   "url": "https://kindersportwoche.ch/camps-und-lager/preise/",
+   "title": "KinderOutdoorWoche Bülach",
+   "provider": "KinderSportWoche",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 360.0,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Bülach",
+   "venue_name": "Hirslen",
+   "language": "de",
+   "description": "Multi-day outdoor sports holiday camp for children with daily activities from 9am to 4pm.",
+   "image_url": null,
+   "confidence": 0.75,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-13",
+     "end_date": "2026-07-17",
+     "start_time": "09:00",
+     "end_time": "16:00"
+    }
+   ]
+  },
+  {
+   "url": "https://kindersportwoche.ch/camps-und-lager/kindersportwoche/",
+   "title": "KinderSportWoche KOW Baden 1",
+   "provider": "KinderSportWoche",
+   "topics": [
+    "sports"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Baden",
+   "venue_name": null,
+   "language": "de",
+   "description": "Multi-sport holiday week with ball sports, martial arts, dance, acrobatics, athletics and climbing.",
+   "image_url": null,
+   "confidence": 0.85,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-06",
+     "end_date": "2026-07-10",
+     "start_time": "08:00",
+     "end_time": "18:00"
+    }
+   ]
+  },
+  {
+   "url": "https://kindersportwoche.ch/camps-und-lager/kindersportwoche/",
+   "title": "KinderSportWoche KOW Bülach",
+   "provider": "KinderSportWoche",
+   "topics": [
+    "sports"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Bülach",
+   "venue_name": null,
+   "language": "de",
+   "description": "Multi-sport holiday week with ball sports, martial arts, dance, acrobatics, athletics and climbing.",
+   "image_url": null,
+   "confidence": 0.85,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-13",
+     "end_date": "2026-07-17",
+     "start_time": "08:00",
+     "end_time": "18:00"
+    }
+   ]
+  },
+  {
+   "url": "https://www.kinderthur.ch/ferienprogramm/",
+   "title": "Ferienangebote - Kinderthur",
+   "provider": "Kinderthur",
+   "topics": [
+    "arts",
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "unknown",
+   "price_chf": null,
+   "age_min": 3,
+   "age_max": 13,
+   "commune": "Zürich",
+   "venue_name": null,
+   "language": "de",
+   "description": null,
+   "image_url": null,
+   "confidence": 0.65,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://lordz.ch/",
+   "title": "LORDZ Friendship Week",
+   "provider": "LORDZ Dance Academy",
+   "topics": [
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zurich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Summer friendship week with hip-hop and urban dance activities.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-08-31",
+     "end_date": "2026-09-05",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://lordz.ch/events/sommerferienkurse/",
+   "title": "LORDZ Sommerferienkurse",
+   "provider": "LORDZ",
+   "topics": [
+    "arts",
+    "music"
+   ],
+   "format": "unknown",
+   "cost_type": "paid",
+   "price_chf": 35.0,
+   "age_min": 4,
+   "age_max": 13,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": null,
+   "image_url": null,
+   "confidence": 0.85,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://lordz.ch/",
+   "title": "LORDZ Special Week Summer",
+   "provider": "LORDZ Dance Academy",
+   "topics": [
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zurich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Special hip-hop and urban dance week during summer holidays.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-06",
+     "end_date": "2026-07-11",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://lordz.ch/",
+   "title": "LORDZ Special Week Winter",
+   "provider": "LORDZ Dance Academy",
+   "topics": [
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zurich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Special hip-hop dance week during winter holidays.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-12-14",
+     "end_date": "2026-12-19",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://lordz.ch/",
+   "title": "LORDZ Summer Holiday Courses",
+   "provider": "LORDZ Dance Academy",
+   "topics": [
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zurich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Hip-hop and urban dance summer courses during school holidays.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-17",
+     "end_date": "2026-07-17",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://lordz.ch/",
+   "title": "LORDZ Workshop Week",
+   "provider": "LORDZ Dance Academy",
+   "topics": [
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zurich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Multi-day hip-hop workshop week during summer holidays.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-08-10",
+     "end_date": "2026-08-14",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://mental-stark4.com/kurskalender/",
+   "title": "Mental-Stark4 Aufmerksamkeit Training",
+   "provider": "Mental-Stark4",
+   "topics": [
+    "academic"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zürich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Multi-day summer camp focusing on mental training and aufmerksamkeit training for children and youth.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-20",
+     "end_date": "2026-07-24",
+     "start_time": "09:00",
+     "end_time": "12:30"
+    }
+   ]
+  },
+  {
+   "url": "https://mental-stark4.com/kurskalender/",
+   "title": "Mental-Stark4 Konflikt Training",
+   "provider": "Mental-Stark4",
+   "topics": [
+    "academic"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zürich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Multi-day summer camp focusing on mental training and konflikt training for children and youth.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-13",
+     "end_date": "2026-07-17",
+     "start_time": "09:00",
+     "end_time": "12:30"
+    }
+   ]
+  },
+  {
+   "url": "https://mental-stark4.com/kurskalender/",
+   "title": "Mental-Stark4 Selbstgespräch Training",
+   "provider": "Mental-Stark4",
+   "topics": [
+    "academic"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zürich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Multi-day summer camp focusing on mental training and selbstgespräch training for children and youth.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-08-10",
+     "end_date": "2026-08-14",
+     "start_time": "09:00",
+     "end_time": "12:30"
+    }
+   ]
+  },
+  {
+   "url": "https://mental-stark4.com/kurskalender/",
+   "title": "Mental-Stark4 Wahrnehmung Training",
+   "provider": "Mental-Stark4",
+   "topics": [
+    "academic"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zürich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Multi-day summer camp focusing on mental training and wahrnehmung training for children and youth.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-08-03",
+     "end_date": "2026-08-07",
+     "start_time": "09:00",
+     "end_time": "12:30"
+    }
+   ]
+  },
+  {
+   "url": "https://moving-sportcamps.ch/camps/",
+   "title": "moving Sportcamps - Fussballcamps",
+   "provider": "moving Sportcamps",
+   "topics": [
+    "sports"
+   ],
+   "format": "full_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": 5,
+   "age_max": 14,
+   "commune": "Wangen",
+   "venue_name": null,
+   "language": "de",
+   "description": "Fussball-Feriencamps für Kinder. Montag-Freitag von 9:30-16:00 Uhr mit Mittagessen.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://moving-sportcamps.ch/camps/",
+   "title": "moving Sportcamps - Polysportcamps",
+   "provider": "moving Sportcamps",
+   "topics": [
+    "sports"
+   ],
+   "format": "full_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": 5,
+   "age_max": 14,
+   "commune": "Wangen",
+   "venue_name": null,
+   "language": "de",
+   "description": "Feriencamps für Kinder mit verschiedenen Sportarten. Montag-Freitag von 9:30-16:00 Uhr mit Mittagessen.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://moving-sportcamps.ch/camps/",
+   "title": "moving Sportcamps - Tanzcamps",
+   "provider": "moving Sportcamps",
+   "topics": [
+    "arts"
+   ],
+   "format": "full_day",
+   "cost_type": "paid",
+   "price_chf": 320.0,
+   "age_min": 7,
+   "age_max": 15,
+   "commune": "Wangen",
+   "venue_name": null,
+   "language": "de",
+   "description": "Tanz-Feriencamps für Kinder und Jugendliche. Montag-Freitag von 9:30-16:00 Uhr mit Mittagessen.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://mssports.ch/polysportcamps",
+   "title": "ALDI Sportcamps - Polysportiv",
+   "provider": "MS Sports / ALDI",
+   "topics": [
+    "sports"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 315.0,
+   "age_min": 6,
+   "age_max": 15,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Vielseitige Feriencamps mit verschiedenen Sportarten, Spielen und Highlights für Kinder und Jugendliche.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-01",
+     "end_date": "2026-08-31",
+     "start_time": "09:30",
+     "end_time": "16:00"
+    }
+   ]
+  },
+  {
+   "url": "https://mssports.ch/fussballcamps",
+   "title": "MS Sports Swisscom Football Camps 2026",
+   "provider": "MS Sports",
+   "topics": [
+    "sports"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 315.0,
+   "age_min": 6,
+   "age_max": 15,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Professional football camps with intensive training, matches and team activities. Over 110 camps across Switzerland.",
+   "image_url": null,
+   "confidence": 0.85,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-06-01",
+     "end_date": "2026-09-30",
+     "start_time": "09:30",
+     "end_time": "16:00"
+    }
+   ]
+  },
+  {
+   "url": "https://mssports.ch/tanzcamps",
+   "title": "mssports.ch: Infos",
+   "provider": "MS Sports",
+   "topics": [
+    "sports",
+    "languages",
+    "music"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 285.0,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Wil",
+   "venue_name": null,
+   "language": "de",
+   "description": null,
+   "image_url": null,
+   "confidence": 0.85,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "http://www.musicalcamp.ch",
+   "title": "MusicalCamp Bern",
+   "provider": "MusicalCamp",
+   "topics": [
+    "music",
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Bern",
+   "venue_name": "Theaterszene",
+   "language": "de",
+   "description": "Musical holiday camp featuring songs, dances and theatre performance.",
+   "image_url": null,
+   "confidence": 0.9,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-06",
+     "end_date": "2026-07-10",
+     "start_time": "09:30",
+     "end_time": "15:00"
+    }
+   ]
+  },
+  {
+   "url": "http://www.musicalcamp.ch#skills",
+   "title": "MusicalCamp Langenthal",
+   "provider": "MusicalCamp",
+   "topics": [
+    "music",
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Langenthal",
+   "venue_name": "Stadttheater Langenthal",
+   "language": "de",
+   "description": "Musical theatre camp during autumn holidays with singing, dancing and theatrical performances.",
+   "image_url": null,
+   "confidence": 0.85,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-10-05",
+     "end_date": "2026-10-09",
+     "start_time": "09:30",
+     "end_time": "19:00"
+    }
+   ]
+  },
+  {
+   "url": "http://www.musicalcamp.ch",
+   "title": "MusicalCamp Liestal",
+   "provider": "MusicalCamp",
+   "topics": [
+    "music",
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Liestal",
+   "venue_name": "Theater Palazzo",
+   "language": "de",
+   "description": "Musical holiday camp featuring songs, dances and theatre performance.",
+   "image_url": null,
+   "confidence": 0.9,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-06-29",
+     "end_date": "2026-07-03",
+     "start_time": "09:30",
+     "end_time": "15:00"
+    }
+   ]
+  },
+  {
+   "url": "http://www.musicalcamp.ch",
+   "title": "MusicalCamp Luzern",
+   "provider": "MusicalCamp",
+   "topics": [
+    "music",
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Luzern",
+   "venue_name": "Aula Schulhaus Wartegg",
+   "language": "de",
+   "description": "Musical holiday camp featuring songs, dances and theatre performance.",
+   "image_url": null,
+   "confidence": 0.9,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-27",
+     "end_date": "2026-07-31",
+     "start_time": "09:30",
+     "end_time": "15:00"
+    }
+   ]
+  },
+  {
+   "url": "http://www.musicalcamp.ch#skills",
+   "title": "MusicalCamp Luzern",
+   "provider": "MusicalCamp",
+   "topics": [
+    "music",
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Lucerne",
+   "venue_name": "Aula Schulhaus Wartegg",
+   "language": "de",
+   "description": "Musical theatre camp featuring singing, dancing and theatrical performances.",
+   "image_url": null,
+   "confidence": 0.85,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-27",
+     "end_date": "2026-07-31",
+     "start_time": "09:00",
+     "end_time": "14:00"
+    }
+   ]
+  },
+  {
+   "url": "http://www.musicalcamp.ch",
+   "title": "MusicalCamp Solothurn",
+   "provider": "MusicalCamp",
+   "topics": [
+    "music",
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Solothurn",
+   "venue_name": "Probebühne TOBS",
+   "language": "de",
+   "description": "Musical holiday camp featuring songs, dances and theatre performance.",
+   "image_url": null,
+   "confidence": 0.9,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-27",
+     "end_date": "2026-07-31",
+     "start_time": "09:30",
+     "end_time": "15:00"
+    }
+   ]
+  },
+  {
+   "url": "http://www.musicalcamp.ch",
+   "title": "MusicalCamp Thun",
+   "provider": "MusicalCamp",
+   "topics": [
+    "music",
+    "arts"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Thun",
+   "venue_name": "Bärensaal",
+   "language": "de",
+   "description": "Musical holiday camp featuring songs, dances and theatre performance.",
+   "image_url": null,
+   "confidence": 0.9,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-06",
+     "end_date": "2026-07-11",
+     "start_time": "09:30",
+     "end_time": "15:00"
+    }
+   ]
+  },
+  {
+   "url": "https://plusport.ch/de/sport/breitensport/sportcamps/sportcamps-programm/",
+   "title": "PluSport Mit einer Jolle aufs Wasser",
+   "provider": "PluSport",
+   "topics": [
+    "sports"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zug",
+   "venue_name": null,
+   "language": "de",
+   "description": "Multi-day sports camp for children and youth in Zug.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-12",
+     "end_date": "2026-07-18",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://plusport.ch/de/sport/breitensport/sportcamps/sportcamps-programm/",
+   "title": "PluSport Segeln auf dem Zugersee",
+   "provider": "PluSport",
+   "topics": [
+    "sports"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zug",
+   "venue_name": null,
+   "language": "de",
+   "description": "Multi-day sports camp for children and youth in Zug.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-05",
+     "end_date": "2026-07-11",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://plusport.ch/",
+   "title": "PluSport Sportcamps",
+   "provider": "PluSport",
+   "topics": [
+    "sports"
+   ],
+   "format": "multi_day",
+   "cost_type": "unknown",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Über 100 Sportcamps pro Jahr für Kinder, Jugendliche und Erwachsene mit Behinderungen und ohne.",
+   "image_url": null,
+   "confidence": 0.7,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-01",
+     "end_date": "2026-08-31",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://reformiert-zuerich.ch/home/home~1666/themen-im-fokus~3836/ferienlager-2026-fur-kinder-und-jugendliche/90555/",
+   "title": "Sommertageslager Narnia",
+   "provider": "Reformierte Kirche Zürich (Kirchenkreis sechs)",
+   "topics": [
+    "nature",
+    "arts",
+    "other"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": 220.0,
+   "age_min": 6,
+   "age_max": 10,
+   "commune": "Zurich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Summer day camp featuring Narnia adventure stories, creative activities, crafts and nature experiences.",
+   "image_url": null,
+   "confidence": 0.9,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-07-13",
+     "end_date": "2026-07-17",
+     "start_time": "09:00",
+     "end_time": "17:00"
+    }
+   ]
+  },
+  {
+   "url": "https://www.sah-schweiz.ch/angebote/kinderferienlager/",
+   "title": "SAH Kinder- und Jugendferienlager 2026",
+   "provider": "SAH Schweiz (Schweizerisches Arbeiterhilfswerk)",
+   "topics": [
+    "sports",
+    "nature",
+    "other"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": 8,
+   "age_max": 15,
+   "commune": null,
+   "venue_name": null,
+   "language": "de",
+   "description": "Winter, summer and autumn holiday camps for children and youth ages 8-15 with sports, nature activities and social support.",
+   "image_url": null,
+   "confidence": 0.85,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": [
+    {
+     "start_date": "2026-02-01",
+     "end_date": "2026-02-07",
      "start_time": null,
      "end_time": null
     }
@@ -377,6 +1860,119 @@
      "end_time": "17:00"
     }
    ]
+  },
+  {
+   "url": "https://xlabs.ch/en/zurich/camps?utm_source=website&utm_medium=banner&utm_campaign=camps",
+   "title": "X Labs Holiday Coding Camps",
+   "provider": "X Labs",
+   "topics": [
+    "coding",
+    "science"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zürich",
+   "venue_name": null,
+   "language": "en",
+   "description": "Coding and technology holiday camps for children during school breaks in Zurich.",
+   "image_url": null,
+   "confidence": 0.65,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://xlabs.ch/en/zurich/camps",
+   "title": "X Labs Summer Camps Zurich",
+   "provider": "X Labs",
+   "topics": [
+    "coding",
+    "science"
+   ],
+   "format": "multi_day",
+   "cost_type": "paid",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zürich",
+   "venue_name": null,
+   "language": "en",
+   "description": "Holiday coding and science camps for children in Zurich.",
+   "image_url": null,
+   "confidence": 0.65,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://yenhan-dancecenter.ch/de/schule/news/event/ballet-camp-2.html",
+   "title": "Ballet Camp",
+   "provider": "Yen Han Dance Center",
+   "topics": [
+    "arts"
+   ],
+   "format": "full_day",
+   "cost_type": "unknown",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": null,
+   "venue_name": "Yen Han Dance Center",
+   "language": "de",
+   "description": "Intensives Ballettcamp von Montag bis Freitag mit umfassendem Ballettprogram für Kinder.",
+   "image_url": null,
+   "confidence": 0.5,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://zsf.ch/ferienprogramm/",
+   "title": "Ferienlager ZSF",
+   "provider": "ZSF",
+   "topics": [
+    "other"
+   ],
+   "format": "multi_day",
+   "cost_type": "unknown",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zürich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Erlebnisferien mit verschiedenen Angeboten wie Abenteuerlager, Zirkus und weitere Aktivitäten.",
+   "image_url": null,
+   "confidence": 0.6,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
+  },
+  {
+   "url": "https://zuerich.krebsliga.ch/beratung-therapie/krebsbetroffene-kinder-und-jugendliche/ferienwoche-erlebnislager",
+   "title": "Ferienwoche für krebsbetroffene Kinder und Jugendliche",
+   "provider": "Krebsliga Zürich",
+   "topics": [
+    "sports",
+    "nature"
+   ],
+   "format": "multi_day",
+   "cost_type": "free",
+   "price_chf": null,
+   "age_min": null,
+   "age_max": null,
+   "commune": "Zürich",
+   "venue_name": null,
+   "language": "de",
+   "description": "Holiday week with support and recreational activities for children and youth affected by cancer.",
+   "image_url": null,
+   "confidence": 0.65,
+   "query": "discovered",
+   "extractor": "haiku",
+   "occasions": []
   }
  ]
 }
