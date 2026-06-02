@@ -54,9 +54,55 @@ local scout (Startpage search, Swiss IP) → per-domain nav-link crawl → dump 
   courses mostly lack local images (topic placeholder); a verification pass (re-check
   dates/age/price, clear `needs_verify`) is the recommended next step.
 
+
+**Complete discovered-provider list:**
+
+<details>
+<summary><b>All 93 discovered providers</b> (snapshot 2026-06-02, 355 courses; canonical machine-readable list = <code>crawler/discovery_seed.json</code>)</summary>
+
+| provider | n | provider | n | provider | n |
+|---|--:|---|--:|---|--:|
+| `11ts-academy.ch` | 16 | `judo-club-uster.ch` | 1 | `reiten-total.ch` | 1 |
+| `academicus.co` | 1 | `kampfkunstzuerich.ch` | 1 | `reitschulekolbenhof.ch` | 1 |
+| `aquakidz.ch` | 9 | `karate-schulen.ch` | 1 | `reitstallzumaettenberg.ch` | 1 |
+| `baholz.ch` | 2 | `kikuka.ch` | 3 | `risingstar-tennis.ch` | 3 |
+| `bauernhof-ferien.ch` | 2 | `kinder-camps.ch` | 4 | `robomatik.ch` | 1 |
+| `begleitetesmalen.com` | 2 | `kindersportwoche.ch` | 6 | `sah-schweiz.ch` | 4 |
+| `bjjcampfinder.com` | 1 | `kinderthur.ch` | 1 | `sail.ch` | 1 |
+| `bjjglobetrotters.com` | 1 | `kletterschule.ch` | 4 | `schildkroetli-swimmers.ch` | 1 |
+| `budo-wil.ch` | 1 | `kungfufighting.ch` | 1 | `schwimmschulepape.ch` | 1 |
+| `buehnerei.ch` | 2 | `limmatsharks.com` | 2 | `she-ceramics.ch` | 1 |
+| `camprock.ch` | 9 | `littlescientists.ch` | 1 | `simplytheatre.com` | 1 |
+| `chess4kids.ch` | 4 | `lolabrause.ch` | 8 | `sparkscience.ch` | 5 |
+| `chlini-einsteins.ch` | 4 | `lordz.ch` | 10 | `sports-professionals.ch` | 3 |
+| `circusbellissimo.ch` | 1 | `malspielraum.ch` | 11 | `ss.scmeilen.ch` | 3 |
+| `closeencounterstheatre.com` | 1 | `mental-stark4.com` | 9 | `startbahn29.ch` | 16 |
+| `codecampworld.ch` | 11 | `metzenthin.ch` | 1 | `swiss-barcaacademy.com` | 7 |
+| `dance4fun.ch` | 1 | `moving-sportcamps.ch` | 7 | `tanz-zwicky.ch` | 2 |
+| `dancegallery.ch` | 4 | `mssports.ch` | 5 | `techsparkacademy.ch` | 3 |
+| `en.artiloft.ch` | 8 | `musicalcamp.ch` | 7 | `theater-purpur.ch` | 1 |
+| `explorit.ch` | 1 | `newdanceacademy.ch` | 1 | `toepferei8008.ch` | 2 |
+| `faeger.ch` | 1 | `nextleveltennis.ch` | 2 | `twist-tkd.ch` | 2 |
+| `fcwitikon.ch` | 4 | `pferde-erlebnisse.ch` | 1 | `verabjj.ch` | 3 |
+| `fcz.ch` | 11 | `plusport.ch` | 7 | `wassersport-camp.ch` | 3 |
+| `ffzh.ch` | 5 | `pony-reitschule.ch` | 3 | `wwf-zh.ch` | 1 |
+| `filacro.ch` | 4 | `ponyakademie.ch` | 1 | `xlabs.ch` | 8 |
+| `filmkids.ch` | 8 | `ponyreiten-dietlikon.ch` | 3 | `yenhan-dancecenter.ch` | 2 |
+| `frmclinics.ch` | 9 | `ponyreitenzuerich.ch` | 2 | `youngexplorersclub.ch` | 3 |
+| `gc-amicitia.ch` | 2 | `projektwoche.ch` | 2 | `zirkusquartier.ch` | 4 |
+| `horatkeramik.com` | 1 | `rainbow-ranch.ch` | 2 | `zsf.ch` | 4 |
+| `insideout-tennis.com` | 2 | `reformiert-zuerich.ch` | 6 | `zuerich.krebsliga.ch` | 2 |
+| `insieme-zuerich.ch` | 16 | `reiten-erleben.ch` | 6 | `zuerioberland24.ch` | 2 |
+
+</details>
 ---
 
-## Executive summary
+## Appendix — original research report (June 2026, background)
+
+*Historical context only. The plan it proposed (including the crawl strategy) has been
+**executed** — see **Implementation status** and **Discovery layer** at the top of this file.*
+
+### Executive summary
 
 The key finding: **Pro Juventute's "Feriennet"** is a shared, open-source booking
 platform (`onegov.feriennet`, built on **OneGov Cloud** by **Seantis GmbH**) that powers
@@ -189,28 +235,13 @@ Juventute ecosystem.
 
 ---
 
-## 5. Recommended crawl strategy — first 3–5 targets
+## 5. Crawl strategy — EXECUTED
 
-1. **Feriennet fleet via `/activities` HTML (TOP).** One parser handles 210+ instances
-   (shared OneGov markup + URL grammar + Activity→Occasion→Period model). Start with
-   `ferienplausch.feriennet.projuventute.ch/activities` (~51 ZH municipalities, 6–16, prices
-   + ages in HTML). Likely yields most free/communal Zürich offerings.
-2. **Elternkompass (`kompass.projuventute.ch`) as enumeration seed** — discover full list of
-   ZH-region Feriennet subdomains; doubles as competitor benchmark.
-3. **ferienprogramm.ch** — second shared platform (Winterthur region), one bespoke adapter.
-4. **Kanton ZH Jugendsportcamps (`jugendsportcamps.ch`)** — one adapter, ~30 camps,
-   authoritative public-sector, age+sport structured.
-5. **High-volume private providers** — best ROI: **Logiscool**, **Kinder-Camps**, **friLingue**
-   (paid coding/sport/language segment Feriennet under-represents).
+The strategy this report proposed has been implemented; see **Implementation status** (top).
+In short: the Feriennet fleet (one parser, 10 ZH instances) + ferienprogramm + jugendsportcamps
+(via its JSON API) + codora + friLingue were built, then the **discovery layer** added ~93
+long-tail providers. Logiscool was the one recommended target deferred (booking-widget walled).
 
-**Why this ordering:** effort is dominated by number of distinct HTML structures, not number
-of sources. Feriennet collapses ~210 sources into one adapter.
-
-### Open items to verify before building
-- ToS/Datenschutz text for Feriennet & ferienprogramm.ch not fully readable — confirm no
-  anti-scraping clause per instance. **[unverified]**
-- Stadt Zürich Sportamt "Ferienplausch" vs. Verein/Pro Juventute "Ferienplausch" name
-  collision — both route via Feriennet, confirm operationally. **[partly unverified]**
-- Wädenswil/Uster/Dübendorf/Kloten/Dietikon/Wetzikon: within ZVV/Ferienplausch ambit but
-  separate portals not individually confirmed. **[unverified]**
-- Confirm OneGov CSV/JSON export is admin-only on production.
+*Residual open item from the original research:* ToS/Datenschutz was treated leniently for this
+local/personal project — revisit before any public/commercial use (see PRD §13). The original
+Feriennet name-collision and per-commune-portal questions were resolved during implementation.

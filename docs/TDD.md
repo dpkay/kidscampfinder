@@ -1,7 +1,7 @@
 # CourseCrawler — Technical Design Document
 
 *Draft v0.1 — 2026-06-01. Implements [`PRD.md`](./PRD.md). Source map in
-[`RESEARCH-SOURCES.md`](./RESEARCH-SOURCES.md).*
+[`SOURCES.md`](./SOURCES.md).*
 
 ## 1. Overview
 
@@ -280,7 +280,7 @@ A second SPA route (`#admin`) backed by one endpoint:
 
 Platform adapters (§5–6) only reach providers that list on a platform. Independent provider
 sites are caught by a separate **discovery** pipeline (coverage rationale + results in
-[`RESEARCH-SOURCES.md`](RESEARCH-SOURCES.md)).
+[`SOURCES.md`](SOURCES.md)).
 
 ```
 local scout → candidate domains → per-domain nav-link crawl → dump pages

@@ -25,7 +25,7 @@ It has two parts:
 
 > 📚 Background docs: [`docs/PRD.md`](docs/PRD.md) (the product plan),
 > [`docs/TDD.md`](docs/TDD.md) (the technical design),
-> [`docs/RESEARCH-SOURCES.md`](docs/RESEARCH-SOURCES.md) (where the data comes from).
+> [`docs/SOURCES.md`](docs/SOURCES.md) (where the data comes from).
 
 ---
 

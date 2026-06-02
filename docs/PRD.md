@@ -1,6 +1,6 @@
 # CourseCrawler — Product Requirements Document
 
-*Draft v0.1 — 2026-06-01. Source inventory lives in [`RESEARCH-SOURCES.md`](./RESEARCH-SOURCES.md).
+*Draft v0.1 — 2026-06-01. Source inventory lives in [`SOURCES.md`](./SOURCES.md).
 Items marked **[ASSUMPTION]** are my defaults where you didn't specify — flag any you disagree with.*
 
 ---
@@ -80,7 +80,7 @@ The success signal is qualitative-but-real:
 
 ## 7. Data sources & crawl strategy
 
-Full inventory and URLs in [`RESEARCH-SOURCES.md`](./RESEARCH-SOURCES.md). Key points:
+Full inventory and URLs in [`SOURCES.md`](./SOURCES.md). Key points:
 
 **The wedge: the Feriennet fleet.** Pro Juventute's **Feriennet** (`onegov.feriennet` /
 OneGov Cloud) powers **210+ Ferienpässe nationwide**, each at

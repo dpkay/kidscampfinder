@@ -12,8 +12,6 @@ const TOPIC_EMOJI: Record<string, string> = {
 
 type Mode = "" | "close" | "page";
 
-let swipeHintSeen = false; // show the swipe hint only once per session
-
 export function CourseDetail({
   courses,
   index,
@@ -30,17 +28,7 @@ export function CourseDetail({
   const { t, topic, format, locale } = makeT(lang);
   const [off, setOff] = useState({ x: 0, y: 0 });
   const [anim, setAnim] = useState(false);
-  const [showHint, setShowHint] = useState(false);
   const g = useRef<{ sx: number; sy: number; mode: Mode } | null>(null);
-
-  // first time a detail is opened this session, briefly show how to navigate
-  useEffect(() => {
-    if (swipeHintSeen || courses.length < 2) return;
-    swipeHintSeen = true;
-    setShowHint(true);
-    const id = window.setTimeout(() => setShowHint(false), 2900);
-    return () => clearTimeout(id);
-  }, []);
 
   const vw = () => window.innerWidth;
   const vh = () => window.innerHeight;
