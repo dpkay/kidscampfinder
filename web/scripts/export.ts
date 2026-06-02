@@ -225,31 +225,26 @@ function buildAdmin() {
     .filter((s) => String(s.source).startsWith("feriennet"))
     .reduce((a, s) => a + s.courses, 0);
   const feriennetInstances = bySource.filter((s) => String(s.source).startsWith("feriennet")).length;
+  const discoveredProviders = bySource.filter((s) => String(s.source).startsWith("discovered:")).length;
   const unique = total - duplicates;
   const potential = [
-    {
-      label: `Feriennet instances (${feriennetInstances} crawled)`,
-      status: "partial" as const,
-      estimate: 60,
-      note: "More ZH commune instances exist beyond those probed; ~+60 courses plausible.",
-    },
     {
       label: "Other holiday periods (autumn/winter/spring)",
       status: "untapped" as const,
       estimate: feriennetCourses * 2,
-      note: "Only the active period is crawled. Each instance also runs other-period passes.",
+      note: "Biggest lever. Only the active summer period is published/crawled on Feriennet; autumn/winter/spring add ~2× once communes publish them.",
     },
     {
-      label: "jugendsportcamps.ch (cantonal)",
-      status: "untapped" as const,
-      estimate: 30,
-      note: "~30 authoritative cantonal sports camps. JS-rendered → needs a Playwright adapter.",
-    },
-    {
-      label: "Private providers (Logiscool, Kinder-Camps, friLingue, …)",
-      status: "untapped" as const,
+      label: `Deeper long-tail discovery (${discoveredProviders} providers found)`,
+      status: "partial" as const,
       estimate: 150,
-      note: "Paid coding/sport/language segment. Each provider is a bespoke adapter.",
+      note: `The discovery scout already found ${discoveredProviders} independent providers; more exist via social media (Instagram/FB) + deeper search. NB: organic extraction is thin (~24% of discovered rows have age+price+date) — a verification pass would enrich existing rows rather than add new ones.`,
+    },
+    {
+      label: `More Feriennet ZH commune instances (${feriennetInstances} crawled)`,
+      status: "partial" as const,
+      estimate: 40,
+      note: "A few more standalone commune instances may exist beyond those probed.",
     },
   ];
 

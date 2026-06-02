@@ -93,20 +93,26 @@ Screenshots of every view are in [`web/screenshots/`](web/screenshots/).
 
 ## 📦 What's in the box (current dataset)
 
-- **~728 unique courses · 1,090+ dated occasions** across **14 sources**:
-  - **Feriennet fleet (10 ZH instances)** — ferienplausch (regional, ~51 communes) +
-    standalone communes: pfaeffikon, urdorf, neftenbach, thalwil, stadel, horgen,
-    bachenbülach, glattfelden, oberengstringen.
-  - **ferienprogramm.ch** (Winterthur region), **codora** (Zürich coding/robotics camps),
-    **jugendsportcamps.ch** (Canton ZH Sportamt — via its public JSON API, filtered to a ZH
-    bounding box), **friLingue** (Swiss residential language camps — fills the languages topic).
-- Coverage: **97% images, 100% age + dated, ~98% price, ~99% commune, ~93% coordinates.**
-- Images are downloaded and served locally; courses are grouped (a multi-week camp = one
-  card, "runs N weeks / KW range"); cross-source duplicates are flagged; past occasions are
-  hidden.
-- Topic mix skews toward **sports** (jugendsportcamps is sport-heavy); coding is now better
-  covered (codora). One street-name/non-ZH commune may slip through the bbox — the web
-  layer's `inZH`/Bezirk lookup is the precise canton filter.
+- **~1,090 courses (~950 currently active) · ~1,430 dated occasions** from **~106 sources**
+  (full list in [`docs/SOURCES.md`](docs/SOURCES.md)):
+  - **14 platform sources** — the **Feriennet fleet (10 ZH instances)** (ferienplausch +
+    pfaeffikon, urdorf, neftenbach, thalwil, stadel, horgen, bachenbülach, glattfelden,
+    oberengstringen), **ferienprogramm.ch**, **codora** (ZH coding/robotics),
+    **jugendsportcamps.ch** (Canton ZH Sportamt, via its public JSON API), **friLingue**
+    (residential language camps).
+  - **~92 discovered long-tail providers** — independent sites that aren't on any platform
+    (dance schools, judo/BJJ clubs, music/theatre, science labs, sport weeks, adventure
+    camps…), found by the [discovery layer](docs/SOURCES.md#discovery-layer--the-long-tail).
+- Topic mix: sports 511 · arts 230 · nature 181 · coding 78 · science 66 · music 49 · food 35 ·
+  languages 22 · academic 15 (+ other). Courses are grouped (multi-week camp = one card),
+  cross-source duplicates flagged, past occasions hidden.
+- **Data quality is two-tier — be aware:**
+  - **Platform sources (the bulk):** high — ~97% images, ~100% age+dated, ~98% price, ~99% commune.
+  - **Discovered long-tail (~352 courses):** **lower-trust**, flagged `needs_verify`. LLM
+    extraction is thin — only ~24% have age+price+date together. A verification/re-extraction
+    pass (next step) is what lifts these; until then, treat/badge them as candidates.
+- Out-of-canton spill (near-border providers) is stored with its true commune; the web layer's
+  `inZH`/Bezirk lookup is the precise Canton-Zürich filter.
 
 ---
 
