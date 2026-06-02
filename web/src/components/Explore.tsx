@@ -82,6 +82,25 @@ export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => vo
   }, [allCourses, bounds]);
   const count = visible.length;
 
+  // Age slider bounds, recomputed from the actual courses while IGNORING implausible outliers
+  // (some discovered-source rows have a birth year like 2011 or a 0–3 misparse as the "age").
+  // Otherwise a single bad row blows the slider out to 0–2011. Falls back to meta if needed.
+  const safeMeta = useMemo(() => {
+    if (!meta) return null;
+    // plausible kids-camp window: drops birth-year (2011) and 0/1 misparses; 18 is a real
+    // Feriennet max, so keep it.
+    let mn = Infinity, mx = -Infinity;
+    for (const c of allCourses) {
+      if (c.ageMin != null && c.ageMin >= 2 && c.ageMin <= 18) mn = Math.min(mn, c.ageMin);
+      if (c.ageMax != null && c.ageMax >= 2 && c.ageMax <= 18) mx = Math.max(mx, c.ageMax);
+    }
+    return {
+      ...meta,
+      ageMin: mn === Infinity ? meta.ageMin : mn,
+      ageMax: mx === -Infinity ? meta.ageMax : mx,
+    };
+  }, [meta, allCourses]);
+
   const set = (patch: Partial<ExploreFilters>) => setFilters((f) => ({ ...f, ...patch }));
   const hasFilters = !!(filters.week || filters.topic || filters.format ||
     filters.ageMin != null || filters.ageMax != null || filters.maxPrice != null);
@@ -175,8 +194,8 @@ export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => vo
     if (!w) return t("anyWeek");
     return `${fmtDe(w.startDate, locale)} – ${fmtDe(w.endDate, locale)}`;
   })();
-  const ageStr = meta && (filters.ageMin != null || filters.ageMax != null)
-    ? `${filters.ageMin ?? meta.ageMin}–${filters.ageMax ?? meta.ageMax} ${t("ages")}`
+  const ageStr = safeMeta && (filters.ageMin != null || filters.ageMax != null)
+    ? `${filters.ageMin ?? safeMeta.ageMin}–${filters.ageMax ?? safeMeta.ageMax} ${t("ages")}`
     : t("anyAgeShort");
   const priceStr = meta && filters.maxPrice != null && filters.maxPrice < meta.maxPrice
     ? (filters.maxPrice === 0 ? t("free") : `max ${filters.maxPrice} CHF`)
@@ -290,10 +309,10 @@ export function Explore({ lang, onLang }: { lang: Lang; onLang?: (l: Lang) => vo
         </div>
       </BottomSheet>
 
-      {filterOpen && meta && (
+      {filterOpen && safeMeta && (
         <FilterSheet
           filters={filters}
-          meta={meta}
+          meta={safeMeta}
           lang={lang}
           onChange={set}
           onReset={() => setFilters(EMPTY)}
