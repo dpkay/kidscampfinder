@@ -1,0 +1,382 @@
+{
+ "records": [
+  {
+   "url": "https://www.closeencounterstheatre.com/register-for-holiday-camps",
+   "title": "Summer Kids Theatre Camp",
+   "provider": "Close Encounters Theatre",
+   "topics": [
+    "arts"
+   ],
+   "format": "weekly",
+   "cost_type": "unknown",
+   "price_chf": null,
+   "age_min": 6,
+   "age_max": 10,
+   "commune": "Zürich",
+   "venue_name": "CET Studio",
+   "language": "en",
+   "description": "Acting, singing and dancing workshop during the summer break.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "kids theatre camp zürich 2026",
+   "extractor": "agent(WebFetch)",
+   "occasions": [
+    {
+     "start_date": "2026-07-13",
+     "end_date": "2026-07-13",
+     "start_time": null,
+     "end_time": null
+    },
+    {
+     "start_date": "2026-08-10",
+     "end_date": "2026-08-10",
+     "start_time": null,
+     "end_time": null
+    }
+   ]
+  },
+  {
+   "url": "https://www.sparkscience.ch/holiday-camps/mission-to-mars-1",
+   "title": "Mission to Mars",
+   "provider": "Spark Science",
+   "topics": [
+    "science"
+   ],
+   "format": "weekly",
+   "cost_type": "paid",
+   "price_chf": 750.0,
+   "age_min": 5,
+   "age_max": 11,
+   "commune": "Zürich",
+   "venue_name": "GZ Wollishofen",
+   "language": "en",
+   "description": "An out-of-this-world science adventure with experiments and exploration.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "kids summer camp zürich 2026",
+   "extractor": "agent(WebFetch)",
+   "occasions": [
+    {
+     "start_date": "2026-07-13",
+     "end_date": "2026-07-17",
+     "start_time": "09:00",
+     "end_time": "16:30"
+    },
+    {
+     "start_date": "2026-07-20",
+     "end_date": "2026-07-24",
+     "start_time": "09:00",
+     "end_time": "16:30"
+    }
+   ]
+  },
+  {
+   "url": "https://www.sparkscience.ch/holiday-camps/spark-science-holiday-camp-at-sis-1",
+   "title": "Science and Sport Camp",
+   "provider": "Spark Science",
+   "topics": [
+    "science"
+   ],
+   "format": "weekly",
+   "cost_type": "paid",
+   "price_chf": 750.0,
+   "age_min": 5,
+   "age_max": 11,
+   "commune": "Risch-Rotkreuz",
+   "venue_name": "SIS",
+   "language": "en",
+   "description": "Hands-on science combined with sports.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "kids summer camp zürich 2026",
+   "extractor": "agent(WebFetch)",
+   "occasions": [
+    {
+     "start_date": "2026-07-13",
+     "end_date": "2026-07-17",
+     "start_time": "09:00",
+     "end_time": "16:30"
+    }
+   ]
+  },
+  {
+   "url": "https://www.sparkscience.ch/holiday-camps/superheroes-of-science-4",
+   "title": "Superheroes of Science",
+   "provider": "Spark Science",
+   "topics": [
+    "science"
+   ],
+   "format": "weekly",
+   "cost_type": "paid",
+   "price_chf": 750.0,
+   "age_min": 5,
+   "age_max": 11,
+   "commune": "Zürich",
+   "venue_name": "GZ Wollishofen",
+   "language": "en",
+   "description": "Themed science activities and challenges.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "kids summer camp zürich 2026",
+   "extractor": "agent(WebFetch)",
+   "occasions": [
+    {
+     "start_date": "2026-07-27",
+     "end_date": "2026-07-31",
+     "start_time": "09:00",
+     "end_time": "16:30"
+    }
+   ]
+  },
+  {
+   "url": "https://www.sparkscience.ch/holiday-camps/survival-science",
+   "title": "Survival Science",
+   "provider": "Spark Science",
+   "topics": [
+    "science"
+   ],
+   "format": "weekly",
+   "cost_type": "paid",
+   "price_chf": 750.0,
+   "age_min": 5,
+   "age_max": 11,
+   "commune": "Zürich",
+   "venue_name": "GZ Wollishofen",
+   "language": "en",
+   "description": "The science of survival: outdoor activities, first aid, adventure.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "kids summer camp zürich 2026",
+   "extractor": "agent(WebFetch)",
+   "occasions": [
+    {
+     "start_date": "2026-08-03",
+     "end_date": "2026-08-07",
+     "start_time": "09:00",
+     "end_time": "16:30"
+    },
+    {
+     "start_date": "2026-08-10",
+     "end_date": "2026-08-14",
+     "start_time": "09:00",
+     "end_time": "16:30"
+    }
+   ]
+  },
+  {
+   "url": "https://www.verabjj.ch/summer-camp-2026#ages6-12",
+   "title": "Vera BJJ Kids Summer Camp — Full Day (Ages 6–12)",
+   "provider": "Vera BJJ",
+   "topics": [
+    "sports"
+   ],
+   "format": "full_day",
+   "cost_type": "paid",
+   "price_chf": 750.0,
+   "age_min": 6,
+   "age_max": 12,
+   "commune": "Zürich",
+   "venue_name": "Rietberg Montessori School",
+   "language": "en",
+   "description": "Brazilian Jiu-Jitsu summer camp at Rietberg Montessori School Zürich. Half/Full day (9:00–16:00) for ages 6–12: Jiu-Jitsu training, team games, creative workshops, outdoor activities, anti-bullying & self-defense.",
+   "image_url": "https://primary.jwwb.nl/public/r/h/b/temp-rffzknhcozzszrjlqadd/img_2132-high.jpg?enable-io=true&enable=upscale&fit=bounds&width=1200",
+   "confidence": 0.85,
+   "query": "kinder sommercamp zürich jiu jitsu",
+   "extractor": "agent",
+   "occasions": [
+    {
+     "start_date": "2026-08-03",
+     "end_date": "2026-08-07",
+     "start_time": "09:00",
+     "end_time": "16:00"
+    },
+    {
+     "start_date": "2026-08-10",
+     "end_date": "2026-08-14",
+     "start_time": "09:00",
+     "end_time": "16:00"
+    }
+   ]
+  },
+  {
+   "url": "https://www.verabjj.ch/summer-camp-2026",
+   "title": "Vera BJJ Kids Summer Camp — Morning (Ages 4–5)",
+   "provider": "Vera BJJ",
+   "topics": [
+    "sports"
+   ],
+   "format": "half_day",
+   "cost_type": "paid",
+   "price_chf": 450.0,
+   "age_min": 4,
+   "age_max": 5,
+   "commune": "Zürich",
+   "venue_name": "Rietberg Montessori School",
+   "language": "en",
+   "description": "Brazilian Jiu-Jitsu summer camp at Rietberg Montessori School Zürich. Morning program (9:00–12:00) for ages 4–5: playful games, intro to Jiu-Jitsu, lunch & ice cream.",
+   "image_url": "https://primary.jwwb.nl/public/r/h/b/temp-rffzknhcozzszrjlqadd/img_2132-high.jpg?enable-io=true&enable=upscale&fit=bounds&width=1200",
+   "confidence": 0.85,
+   "query": "kinder sommercamp zürich jiu jitsu",
+   "extractor": "agent",
+   "occasions": [
+    {
+     "start_date": "2026-08-03",
+     "end_date": "2026-08-07",
+     "start_time": "09:00",
+     "end_time": "12:00"
+    },
+    {
+     "start_date": "2026-08-10",
+     "end_date": "2026-08-14",
+     "start_time": "09:00",
+     "end_time": "12:00"
+    }
+   ]
+  },
+  {
+   "url": "https://xlabs.ch/en/camps/art-and-sciences",
+   "title": "Art and Sciences",
+   "provider": "X Labs Zurich",
+   "topics": [
+    "arts"
+   ],
+   "format": "weekly",
+   "cost_type": "paid",
+   "price_chf": 650.0,
+   "age_min": 8,
+   "age_max": 12,
+   "commune": "Zürich",
+   "venue_name": "X Labs Zurich",
+   "language": "en",
+   "description": "Creative expression blended with scientific discovery.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "kids summer camp zürich 2026",
+   "extractor": "agent(WebFetch)",
+   "occasions": [
+    {
+     "start_date": "2026-08-03",
+     "end_date": "2026-08-07",
+     "start_time": "09:00",
+     "end_time": "17:00"
+    }
+   ]
+  },
+  {
+   "url": "https://xlabs.ch/en/camps/the-chemistry-of-perfumes",
+   "title": "Chemistry of Perfumes",
+   "provider": "X Labs Zurich",
+   "topics": [
+    "science"
+   ],
+   "format": "weekly",
+   "cost_type": "paid",
+   "price_chf": 650.0,
+   "age_min": 8,
+   "age_max": 12,
+   "commune": "Zürich",
+   "venue_name": "X Labs Zurich",
+   "language": "en",
+   "description": "Fragrance composition via hands-on chemistry.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "kids summer camp zürich 2026",
+   "extractor": "agent(WebFetch)",
+   "occasions": [
+    {
+     "start_date": "2026-07-13",
+     "end_date": "2026-07-17",
+     "start_time": "09:00",
+     "end_time": "17:00"
+    }
+   ]
+  },
+  {
+   "url": "https://xlabs.ch/en/camps/cool-chemistry",
+   "title": "Cool Chemistry",
+   "provider": "X Labs Zurich",
+   "topics": [
+    "science"
+   ],
+   "format": "weekly",
+   "cost_type": "paid",
+   "price_chf": 650.0,
+   "age_min": 8,
+   "age_max": 12,
+   "commune": "Zürich",
+   "venue_name": "X Labs Zurich",
+   "language": "en",
+   "description": "Lab experiments and outdoor recreation.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "kids summer camp zürich 2026",
+   "extractor": "agent(WebFetch)",
+   "occasions": [
+    {
+     "start_date": "2026-08-10",
+     "end_date": "2026-08-14",
+     "start_time": "09:00",
+     "end_time": "17:00"
+    }
+   ]
+  },
+  {
+   "url": "https://xlabs.ch/en/camps/forensic-sciences",
+   "title": "Forensic Sciences",
+   "provider": "X Labs Zurich",
+   "topics": [
+    "science"
+   ],
+   "format": "weekly",
+   "cost_type": "paid",
+   "price_chf": 650.0,
+   "age_min": 8,
+   "age_max": 12,
+   "commune": "Zürich",
+   "venue_name": "X Labs Zurich",
+   "language": "en",
+   "description": "Forensic techniques through experiments.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "kids summer camp zürich 2026",
+   "extractor": "agent(WebFetch)",
+   "occasions": [
+    {
+     "start_date": "2026-07-27",
+     "end_date": "2026-07-31",
+     "start_time": "09:00",
+     "end_time": "17:00"
+    }
+   ]
+  },
+  {
+   "url": "https://xlabs.ch/en/camps/super-engineers",
+   "title": "Super Engineers",
+   "provider": "X Labs Zurich",
+   "topics": [
+    "science"
+   ],
+   "format": "weekly",
+   "cost_type": "paid",
+   "price_chf": 650.0,
+   "age_min": 8,
+   "age_max": 12,
+   "commune": "Zürich",
+   "venue_name": "X Labs Zurich",
+   "language": "en",
+   "description": "Engineering design projects and outdoor activities.",
+   "image_url": null,
+   "confidence": 0.8,
+   "query": "kids summer camp zürich 2026",
+   "extractor": "agent(WebFetch)",
+   "occasions": [
+    {
+     "start_date": "2026-07-20",
+     "end_date": "2026-07-24",
+     "start_time": "09:00",
+     "end_time": "17:00"
+    }
+   ]
+  }
+ ]
+}
